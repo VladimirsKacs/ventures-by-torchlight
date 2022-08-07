@@ -7,6 +7,7 @@ namespace VentureCore
     public interface IItem
     {
         int Weight { get; set; }
+        int Value { get; set; }
         void Eqiup(Adventurer adventurer);
         void Unequip(Adventurer adventurer);
 
