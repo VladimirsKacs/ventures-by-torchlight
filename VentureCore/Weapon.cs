@@ -6,9 +6,9 @@ namespace VentureCore
 {
     public abstract class Weapon:Item
     {
-        public int Dice { get; set; }
-        public int Sides { get; set; }
-        public int Add { get; set; }
-        public int AttributeCorrection { get; set; }
+        public abstract int Dice { get;}
+        public abstract int Sides { get;}
+        public abstract int Add { get;}
+        public abstract int AttributeCorrection { get;}
     }
 }

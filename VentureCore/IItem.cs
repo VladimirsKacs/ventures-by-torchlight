@@ -6,8 +6,12 @@ namespace VentureCore
 {
     public abstract class Item
     {
-        public int Weight { get; set; }
-        public int Value { get; set; }
+        public abstract int Weight { get;}
+        public abstract int Value { get;}
+
+        public abstract string Description { get; }
+
+        public abstract string Name { get; }
         public void Eqiup(Adventurer adventurer)
         {
             if (adventurer.Encumbrance + Weight > adventurer.CarryCapacity)

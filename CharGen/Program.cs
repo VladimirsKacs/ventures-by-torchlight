@@ -48,22 +48,33 @@ namespace CharGen
         {
             var random = new Random();
             var adventurer = new Adventurer();
-            adventurer.Agility = random.Next(1, 6) + random.Next(1, 6) + random.Next(1, 6);
-            adventurer.Constitution = random.Next(1, 6) + random.Next(1, 6) + random.Next(1, 6);
-            adventurer.Dexterity = random.Next(1, 6) + random.Next(1, 6) + random.Next(1, 6);
-            adventurer.Strength = random.Next(1, 6) + random.Next(1, 6) + random.Next(1, 6);
-            adventurer.Hp = adventurer.HpMax = random.Next(1, 6);
+            adventurer.Agility = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+            adventurer.Constitution = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+            adventurer.Dexterity = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+            adventurer.Strength = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
+            adventurer.Hp = adventurer.HpMax = random.Next(1, 7)+ConstCorrection(adventurer);
             adventurer.Level = 1;
             adventurer.Xp = 0;
             adventurer.CarryCapacity = random.Next(3, 10);
             adventurer.Servitude = random.Next(10, 40);
             adventurer.Armor = 0;
             adventurer.Encumbrance = 0;
-            adventurer.Items = new List<IItem>();
+            adventurer.Items = new List<Item>();
             adventurer.Name = NameGen();
             return adventurer;
         }
 
+        static int ConstCorrection (Adventurer adventurer)
+        {
+            if (adventurer.Constitution < 7)
+                return -1;
+            else if (adventurer.Constitution < 13)
+                return 0;
+            else if (adventurer.Constitution < 16)
+                return 1;
+            else
+                return 2;
+        }
 
         static readonly List<string> honorific = new List<string> { "Mr.", "Ms.", "Dr.", "Pvt."};
         static readonly List<string> firstNames = new List<string> { "Ally", "Aschleigh","Beto","Carbon","Delany","Effoy", "Fitz",

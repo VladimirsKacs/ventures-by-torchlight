@@ -6,9 +6,9 @@ namespace VentureCore
 {
     public abstract class Ranged:Weapon
     {
-        public int RangeIncrement { get; set; }
+        public abstract int RangeIncrement { get;}
         public int Ammo { get; set; }
-        public int AmmoMax { get; set; }
+        public abstract int AmmoMax { get;}
 
         new public void Eqiup(Adventurer adventurer)
         {
