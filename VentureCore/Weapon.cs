@@ -10,5 +10,7 @@ namespace VentureCore
         public abstract int Sides { get;}
         public abstract int Add { get;}
         public abstract int AttributeCorrection { get;}
+
+        public abstract Piercing Piercing { get; }
     }
 }

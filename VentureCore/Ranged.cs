@@ -10,12 +10,15 @@ namespace VentureCore
         public int Ammo { get; set; }
         public abstract int AmmoMax { get;}
 
+        public abstract int Reload { get; }
+
         new public void Eqiup(Adventurer adventurer)
         {
             base.Eqiup(adventurer);
             if (adventurer.Ranged != null)
                 adventurer.Ranged.Unequip(adventurer);
             adventurer.Ranged = this;
+            Ammo = AmmoMax;
         }
 
         new public void Unequip(Adventurer adventurer)
