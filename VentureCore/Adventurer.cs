@@ -19,6 +19,9 @@ namespace VentureCore
         public string Name { get; set; }
         public int Encumbrance { get; set; }
 
-        public List<IItem> Items { get; set; }
+        public Melee Melee { get; set; }
+        public Ranged Ranged { get; set; }
+
+        public List<Item> Items { get; set; }
     }
 }
