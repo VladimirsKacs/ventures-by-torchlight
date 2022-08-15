@@ -31,6 +31,11 @@ namespace CharGen
             return sb.ToString();
         }
 
+        static string Print(Melee melee)
+        {
+            return string.Empty;
+        }
+
         static void Save(Adventurer adventurer)
         {
             var fileName = adventurer.Name + ".adv";
