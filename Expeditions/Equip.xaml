@@ -1,0 +1,22 @@
+﻿<Window x:Class="Expeditions.Equip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Expeditions"
+        xmlns:c="clr-namespace:VentureCore;assembly=VentureCore"
+        mc:Ignorable="d"
+        Title="Equip" Height="800" Width="400">
+    <Window.Resources>
+        <c:AllItems x:Key="AllItems"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource AllItems}"/>
+    </Window.DataContext>
+    <Grid>
+        <ListBox  HorizontalAlignment="Stretch" Margin="0,10,0,50" VerticalAlignment="Stretch" ItemsSource="{Binding All}" Name="Box"/>
+        <Button Content="Equip" HorizontalAlignment="Left" Margin="309,725,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="209,725,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>

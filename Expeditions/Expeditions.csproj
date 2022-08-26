@@ -62,6 +62,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Equip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +77,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Combat.cs" />
+    <Compile Include="FightResult.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Equip.xaml.cs">
+      <DependentUpon>Equip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Expedition.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

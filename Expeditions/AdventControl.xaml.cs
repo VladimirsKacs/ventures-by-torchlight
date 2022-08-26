@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VentureCore;
 
 namespace Expeditions
 {
@@ -20,13 +21,27 @@ namespace Expeditions
     /// </summary>
     public partial class AdventControl : UserControl
     {
-        public AdventControl()
+        public AdventControl(Adventurer adventurer, string path)
         {
+            Adventurer = adventurer;
+            PathToFile = path;
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        { }
-        
+        private void Equip_Click(object sender, RoutedEventArgs e)
+        {
+            var equipDlg = new Equip();
+            if (equipDlg.ShowDialog() == true)
+                equipDlg.Selected.Eqiup(Adventurer);
+        }
+
+        Adventurer Adventurer { get; }
+        public string PathToFile { get; }
+
+        private void Enequip_Click(object sender, RoutedEventArgs e)
+        {
+            if (Items.SelectedItem != null)
+                (Items.SelectedItem as Item).Unequip(Adventurer);
+        }
     }
 }

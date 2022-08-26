@@ -26,7 +26,7 @@ namespace Expeditions
             {
                 var advJson = File.ReadAllText(openFileDialog.FileName);
                 var adventurer = JsonConvert.DeserializeObject<Adventurer>(advJson);
-                Tabs.Items.Add(new TabItem { Content = new AdventControl { DataContext = adventurer }, Header = adventurer.Name });
+                Tabs.Items.Add(new TabItem { Content = new AdventControl(adventurer, openFileDialog.FileName) { DataContext = adventurer }, Header = adventurer.Name });
                 _adventuers.Add(adventurer);
             }
         }

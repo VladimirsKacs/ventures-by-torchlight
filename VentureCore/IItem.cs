@@ -27,5 +27,10 @@ namespace VentureCore
             adventurer.Encumbrance -= Weight;
         }
 
+        new public string ToString()
+        {
+            return Name;
+        }
+
     }
 }
