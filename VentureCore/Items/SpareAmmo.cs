@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VentureCore.Items
+﻿namespace VentureCore.Items
 {
-    class SpareAmmo : Consumable
+    public class SpareAmmo : Consumable
     {
         public override int Weight => 1;
 

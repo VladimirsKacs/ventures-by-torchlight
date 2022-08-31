@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VentureCore.Weapons
+﻿namespace VentureCore.Weapons
 {
-    class NailStick : Melee
+    public class NailStick : Melee
     {
         public override int Dice => 1;
 

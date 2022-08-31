@@ -15,11 +15,12 @@ namespace VentureCore.Enemies
             MeleeAdd = 1;
             Xp = 75;
             Hp = HpMax = 3;
-            LootTable = new Dictionary<int, Item>
+            Name = "Green Slime";
+            LootTable = new LootTable(new Dictionary<Item, int>
             {
-                {0, new GreenGoo() },
-                {50, new Again() }
-            };
+                { new GreenGoo(), 1 },
+                { new Again(), 1 }
+            });
         }
     }
 }

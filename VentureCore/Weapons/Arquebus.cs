@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VentureCore.Weapons
+﻿namespace VentureCore.Weapons
 {
-    class Arquebus : Ranged
+    public class Arquebus : Ranged
     {
         public override int RangeIncrement => 15;
 

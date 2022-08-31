@@ -22,6 +22,8 @@ namespace VentureCore
         public int Ammo { get; set; }
         public int AmmoMax { get; set; }
         public int Xp { get; set; }
-        public Dictionary<int, Item> LootTable { get; set; }
+        public LootTable LootTable { get; set; }
+        public string Name { get; set; }
+        public int Armor { get; set; }
     }
 }

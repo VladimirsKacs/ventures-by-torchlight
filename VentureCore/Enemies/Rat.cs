@@ -15,20 +15,21 @@ namespace VentureCore.Enemies
             MeleeSides = 3;
             Xp = 100;
             Hp = HpMax = 1;
-            LootTable = new Dictionary<int, Item>
-            {
-                {0, null },
-                {10, new SmallBone() },
-                {30, new RatTeeh() },
-                {50, new RatTail() },
-                {70, new RatHide() },
-                {80, new RatSkull() },
-                {85, new SandPaper() },
-                {87, new Pfennig() },
-                {89, new Groshen() },
-                {90, new Florin() },
-                {91, new Again() }
-            };
+            Name = "Rat";
+            LootTable = new LootTable( 
+            new Dictionary<Item, int>{
+                {null, 10 },
+                {new SmallBone(),20 },
+                {new RatTeeh(), 20 },
+                {new RatTail(), 20 },
+                {new RatHide(), 10 },
+                {new RatSkull(), 5 },
+                {new SandPaper(),2 },
+                {new Pfennig(),2 },
+                {new Groshen(),1 },
+                {new Florin(),1 },
+                {new Again(), 10 }
+            });
         }
     }
 }

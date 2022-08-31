@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VentureCore.Weapons
+﻿namespace VentureCore.Weapons
 {
-    class RustyDagger : Melee
+    public class RustyDagger : Melee
     {
         public override int Dice => 1;
 

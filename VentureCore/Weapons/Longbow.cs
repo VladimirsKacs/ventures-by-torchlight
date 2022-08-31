@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VentureCore.Weapons
+﻿namespace VentureCore.Weapons
 {
-    class Longbow : Ranged
+    public class Longbow : Ranged
     {
         public override int RangeIncrement => 50;
 
