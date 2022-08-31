@@ -106,55 +106,64 @@ namespace Expeditions
                 {
                     movement = (movement + 1) / 2;
                     var ranged = adventurer.Ranged;
-                    _log.Append(adventurer.Name + " attacks " + enemy.Name + "with " + ranged.Name+ " from " + range + " feet ");
-                    var roll = _random.Next(20);
-                    var adjustedArmor = enemy.Armor;
-                    switch (ranged.Piercing)
+                    if (ranged.ReloadCooldown > 0)
                     {
-                        case Piercing.Double:
-                            adjustedArmor = enemy.Armor * 2;
-                            break;
-                        case Piercing.Full:
-                            adjustedArmor = 0;
-                            break;
-                        case Piercing.Half:
-                            adjustedArmor = enemy.Armor / 2;
-                            break;
-                    }
-                    var adjustedDexterity = adventurer.Dexterity + ranged.AttributeCorrection;
-                    if (roll < adjustedDexterity && roll >= adjustedArmor)
-                    {
-                        var damage = ranged.Add;
-                        for (var i = 0; i < ranged.Dice; i++)
-                            damage += _random.Next(ranged.Sides) + 1;
-                        _log.AppendLine("and hits for " + damage + " damage.");
-                        enemy.Hp -= damage;
-                        if (enemy.Hp <= 0)
-                        {
-                            enemy.Count -= 1;
-                            enemy.Hp = enemy.HpMax;
-                            if (enemy.Count > 0)
-                                _log.AppendLine("One of the " + enemy.Name + "s dies. " + enemy.Count + " remain.");
-                            else
-                                _log.Append(enemy.Name + " dies.");
-                            if (enemy.Count == 0)
-                            {
-                                _enemies.Remove(enemy);
-                                _enPositions.RemoveAt(enIndex);
-                            }
-                        }
+                        ranged.ReloadCooldown--;
+                        _log.AppendLine(adventurer.Name + " reloads.");
                     }
                     else
                     {
-                        _log.AppendLine("but misses.");
-                    }
+                        _log.Append(adventurer.Name + " attacks " + enemy.Name + "with " + ranged.Name + " from " + range + " feet ");
+                        var roll = _random.Next(20);
+                        var adjustedArmor = enemy.Armor;
+                        switch (ranged.Piercing)
+                        {
+                            case Piercing.Double:
+                                adjustedArmor = enemy.Armor * 2;
+                                break;
+                            case Piercing.Full:
+                                adjustedArmor = 0;
+                                break;
+                            case Piercing.Half:
+                                adjustedArmor = enemy.Armor / 2;
+                                break;
+                        }
+                        var adjustedDexterity = adventurer.Dexterity + ranged.AttributeCorrection;
+                        if (roll < adjustedDexterity && roll >= adjustedArmor)
+                        {
+                            var damage = ranged.Add;
+                            for (var i = 0; i < ranged.Dice; i++)
+                                damage += _random.Next(ranged.Sides) + 1;
+                            _log.AppendLine("and hits for " + damage + " damage.");
+                            enemy.Hp -= damage;
+                            if (enemy.Hp <= 0)
+                            {
+                                enemy.Count -= 1;
+                                enemy.Hp = enemy.HpMax;
+                                if (enemy.Count > 0)
+                                    _log.AppendLine("One of the " + enemy.Name + "s dies. " + enemy.Count + " remain.");
+                                else
+                                    _log.Append(enemy.Name + " dies.");
+                                if (enemy.Count == 0)
+                                {
+                                    _enemies.Remove(enemy);
+                                    _enPositions.RemoveAt(enIndex);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            _log.AppendLine("but misses.");
+                        }
 
-                    ranged.Ammo--;
-                    var ammo = adventurer.Items.OfType<SpareAmmo>().FirstOrDefault();
-                    if (ranged.Ammo == 0 && ammo != null)
-                    {
-                        ranged.Ammo = ranged.AmmoMax;
-                        adventurer.Items.Remove(ammo);
+                        ranged.Ammo--;
+                        ranged.ReloadCooldown = ranged.Reload;
+                        var ammo = adventurer.Items.OfType<SpareAmmo>().FirstOrDefault();
+                        if (ranged.Ammo == 0 && ammo != null)
+                        {
+                            ranged.Ammo = ranged.AmmoMax;
+                            adventurer.Items.Remove(ammo);
+                        }
                     }
                 }
 
@@ -165,6 +174,14 @@ namespace Expeditions
                     _advPositions[advIndex] += movement;
                     _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name + " (they are now " + (range - movement) + " feet apart.)" );
                 }
+                else if (range < adventurer.IdealRange)
+                {
+                    if (range + movement >= adventurer.IdealRange)
+                        movement = adventurer.IdealRange - range;
+                    _advPositions[advIndex] -= movement;
+                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name + " (they are now " + (range + movement) + " feet apart.)");
+                }
+
 
             }
         }

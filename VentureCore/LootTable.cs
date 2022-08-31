@@ -14,6 +14,7 @@ namespace VentureCore
         public LootTable(Dictionary<Item,int> dic)
         {
             _sum = 0;
+            _loot = new List<Tuple<Item, int>>();
             foreach (var kvp in dic)
             {
                 _sum += kvp.Value;

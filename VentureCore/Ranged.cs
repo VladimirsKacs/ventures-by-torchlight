@@ -11,6 +11,7 @@ namespace VentureCore
         public abstract int AmmoMax { get;}
 
         public abstract int Reload { get; }
+        public int ReloadCooldown { get; set; }
 
         new public void Eqiup(Adventurer adventurer)
         {
