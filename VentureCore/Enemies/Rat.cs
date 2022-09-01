@@ -13,6 +13,7 @@ namespace VentureCore.Enemies
             Agility = 10;
             MeleeDice = 1;
             MeleeSides = 3;
+            MeleeName = "teeth";
             Xp = 100;
             Hp = HpMax = 1;
             Name = "Rat";

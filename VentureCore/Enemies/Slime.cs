@@ -13,6 +13,7 @@ namespace VentureCore.Enemies
             Agility = 5;
             MeleeDice = 0;
             MeleeAdd = 1;
+            MeleeName = "pseudopod";
             Xp = 75;
             Hp = HpMax = 3;
             Name = "Green Slime";
