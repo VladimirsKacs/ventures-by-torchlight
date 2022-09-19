@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using VentureCore.VendorTrash;
 
 namespace VentureCore.Enemies
 {
-    class Slime:Enemy
+    public class Slime:Enemy
     {
         public Slime()
         {

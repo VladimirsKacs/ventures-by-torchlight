@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using VentureCore.VendorTrash;
 
 namespace VentureCore.Enemies
 {
-    class Rat:Enemy
+    public class Rat:Enemy
     {
         public Rat()
         {

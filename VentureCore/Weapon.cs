@@ -12,5 +12,7 @@ namespace VentureCore
         public abstract int AttributeCorrection { get;}
 
         public abstract Piercing Piercing { get; }
+
+
     }
 }

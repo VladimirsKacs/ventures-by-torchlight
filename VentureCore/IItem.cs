@@ -32,5 +32,15 @@ namespace VentureCore
             return Name;
         }
 
+        public string Print()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("[table]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b][u]Name:[/u][/b][/td][td]{Name}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Weight:[/b][/td][td]{Weight})[/td][td]  |  [/td][td][b]Value:[/b][/td][td]{Value}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Description:[/b][/td][td]{Description}[/td][td]");
+            sb.AppendLine("[/table]");
+            return sb.ToString();
+        }
     }
 }

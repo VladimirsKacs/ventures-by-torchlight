@@ -10,5 +10,6 @@
         <TabControl HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="350" Name="Tabs">
         </TabControl>
         <Button Content="Load Adventurer" HorizontalAlignment="Left" Margin="688,491,0,0" VerticalAlignment="Top" Width="96" Click="Button_Click"/>
+        <Button Content="Adventure" HorizontalAlignment="Left" Margin="608,491,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
     </Grid>
 </Window>

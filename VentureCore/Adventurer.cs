@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace VentureCore
 {
@@ -27,5 +28,20 @@ namespace VentureCore
         public int FiringRange { get; set; }
 
         public int IdealRange { get; set; }
+
+        public string Print()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("[table]");
+            sb.AppendLine("[tr][td][b]Entry Bid:[/b][/td][td]3F[/td][td][/td][td][/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b][u]Name:[/u][/b][/td][td]{Name}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]HP (max):[/b][/td][td]{Hp}({HpMax})[/td][td]  |  [/td][td][b]Armor Class:[/b][/td][td]{Armor}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Strength:[/b][/td][td]{Strength}[/td][td]  |  [/td][td][b]Dexterity:[/b][/td][td]{Dexterity}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Constitution:[/b][/td][td]{Constitution}[/td][td]  |  [/td][td][b]Agility:[/b][/td][td]{Agility}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Level:[/b][/td][td]{Level}[/td][td]  |  [/td][td][b]XP:[/b][/td][td]{Xp}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Carry Capacity:[/b][/td][td]{CarryCapacity}[/td][td]  |  [/td][td][b]Service Length:[/b][/td][td]{Servitude}[/td][/tr]");
+            sb.AppendLine("[/table]");
+            return sb.ToString();
+        }
     }
 }

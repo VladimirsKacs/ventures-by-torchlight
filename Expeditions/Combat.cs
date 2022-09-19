@@ -20,7 +20,7 @@ namespace Expeditions
         public string Log => _log.ToString();
         readonly StringBuilder _log = new StringBuilder();
 
-        Combat(List<Adventurer> adventurers, List<Enemy> enemies, int distance)
+        public Combat(List<Adventurer> adventurers, List<Enemy> enemies, int distance)
         {
             _adventurers = adventurers;
             _enemies = enemies;
@@ -47,7 +47,7 @@ namespace Expeditions
             return FightResult.Draw;
         }
 
-        public void Round()
+        void Round()
         {
             for (int i = 0; i < _adventurers.Count; i++)
                 StepA(i);
@@ -55,7 +55,7 @@ namespace Expeditions
                 StepE(i);
         }
 
-        public void StepA(int advIndex)
+        void StepA(int advIndex)
         {
             var adventurer = _adventurers[advIndex];
             if (adventurer.Hp < 0)
@@ -200,7 +200,7 @@ namespace Expeditions
             }
         }
 
-        public void StepE(int eIndex)
+        void StepE(int eIndex)
         {
             var enemy = _enemies[eIndex];
             if (enemy.Hp < 0)
