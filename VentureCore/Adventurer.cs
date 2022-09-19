@@ -24,7 +24,7 @@ namespace VentureCore
 
         public List<Item> Items { get; set; }
 
-        public string Range { get; set; }
+        public int FiringRange { get; set; }
 
         public int IdealRange { get; set; }
     }

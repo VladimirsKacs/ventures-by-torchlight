@@ -20,10 +20,10 @@ namespace Expeditions
             return log.ToString();
         }
 
-        //string Combat(List<Adventurer> adventurers, Location location)
-        //{
+        string Combat(List<Adventurer> adventurers, Location location)
+        {
 
-        //}
+        }
 
 
         string Pickup(Location location)

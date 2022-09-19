@@ -11,11 +11,11 @@ namespace Expeditions
     using VentureCore.Weapons;
     class Combat
     {
-        List<Adventurer> _adventurers;
-        List<Enemy> _enemies;
-        List<int> _advPositions;
-        List<int> _enPositions;
-        Random _random;
+        readonly List<Adventurer> _adventurers;
+        readonly List<Enemy> _enemies;
+        readonly List<int> _advPositions;
+        readonly List<int> _enPositions;
+        readonly Random _random;
 
         public string Log => _log.ToString();
         readonly StringBuilder _log = new StringBuilder();
@@ -35,12 +35,24 @@ namespace Expeditions
 
         public FightResult Fight()
         {
+            var i = 0;
+            while (_adventurers.Any() && _enemies.Any() && i++ < 100)
+            {
+                Round();
+            }
+            if(!_adventurers.Any())
+                return FightResult.Lose;
+            if (!_enemies.Any())
+                return FightResult.Win;
             return FightResult.Draw;
         }
 
         public void Round()
         {
-            
+            for (int i = 0; i < _adventurers.Count; i++)
+                StepA(i);
+            for (int i = 0; i < _enemies.Count; i++)
+                StepE(i);
         }
 
         public void StepA(int advIndex)
@@ -260,7 +272,7 @@ namespace Expeditions
 
         bool InRange(Adventurer adventurer, int distance)
         {
-            return distance<adventurer.IdealRange; //TODO: better range
+            return distance<adventurer.FiringRange; //TODO: better range
         }
 
     }
