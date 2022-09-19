@@ -41,7 +41,7 @@ namespace Expeditions
         string Combat(List<Adventurer> adventurers, Location location)
         {
             var sb = new StringBuilder();
-            sb.Append("as you explore, you run into");
+            sb.Append("as you explore, you run into ");
             var rand = new Random();
             Combat combat;
             List<LootTable> loots= new List<LootTable>();
@@ -53,19 +53,19 @@ namespace Expeditions
                         case 0:
                         case 1:
                         case 2:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat()  }, 100);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat {Count=1 }  }, 100);
                             loots.Add(new Rat().LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 3:
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime() }, 100);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime { Count = 1 } }, 100);
                             loots.Add(new Slime().LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(), new Slime() }, 100);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat { Count = 1 }, new Slime { Count = 1 } }, 100);
                             loots.Add(new Rat().LootTable);
                             loots.Add(new Slime().LootTable);
                             sb.AppendLine("a rat and a green slime");
@@ -76,9 +76,9 @@ namespace Expeditions
                     combat= new Combat(adventurers, new List<Enemy> { new Rat(), new Slime() }, 100);
                     break;
             }
-            sb.Append(combat.Log);
             if (combat.Fight() == FightResult.Win)
             {
+                sb.Append(combat.Log);
                 sb.AppendLine("having defeated the enemy, you search their corpses.");
                 var loot = new List<Item>();
                 foreach (var l in loots)
@@ -101,11 +101,13 @@ namespace Expeditions
             }
             else if(combat.Fight() == FightResult.Draw)
             {
+                sb.Append(combat.Log);
                 sb.AppendLine("Exhausted by the fight, you leave each other alone.");
                 return sb.ToString();
             }
             else
             {
+                sb.Append(combat.Log);
                 sb.AppendLine("YOU DIED.");
                 return sb.ToString();
             }

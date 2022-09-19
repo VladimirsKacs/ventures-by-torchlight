@@ -34,8 +34,9 @@ namespace Expeditions
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var expedition = new Expedition();
-            expedition.Go(_adventuers, Location.Basic_1); //TODO: get this from a drop-down list.
-
+            //TODO: get this from a drop-down list.
+            var log = new Log(expedition.Go(_adventuers, Location.Basic_1));
+            log.Show();
         }
     }
 }

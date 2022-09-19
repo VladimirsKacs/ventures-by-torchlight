@@ -12,14 +12,14 @@ namespace VentureCore
         public abstract string Description { get; }
 
         public abstract string Name { get; }
-        public void Eqiup(Adventurer adventurer)
+        virtual public void Eqiup(Adventurer adventurer)
         {
             if (adventurer.Encumbrance + Weight > adventurer.CarryCapacity)
                 throw new Exception("too heavy");
             adventurer.Items.Add(this);
             adventurer.Encumbrance += Weight;
         }
-        public void Unequip(Adventurer adventurer)
+        virtual public void Unequip(Adventurer adventurer)
         {
             if (!adventurer.Items.Contains(this))
                 throw new Exception("not equipped");

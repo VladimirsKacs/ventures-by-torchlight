@@ -61,7 +61,7 @@ namespace Expeditions
             if (adventurer.Hp < 0)
                 return;
             var closestE = _enPositions.OrderBy(x => x).FirstOrDefault();
-            var enIndex = _enPositions.Find(x => x == closestE); //TODO: better targeting
+            var enIndex = _enPositions.IndexOf(closestE); //TODO: better targeting
             var enemy = _enemies[enIndex];
             if (_advPositions[advIndex] == closestE)
             {
@@ -98,7 +98,7 @@ namespace Expeditions
                             _log.AppendLine("One of the "+enemy.Name+"s dies. "+enemy.Count+" remain.");
                         else 
                             _log.Append(enemy.Name + " dies.");
-                        if (enemy.Count == 0)
+                        if (enemy.Count <= 0)
                         {
                             _enemies.Remove(enemy);
                             _enPositions.RemoveAt(enIndex);
@@ -206,7 +206,7 @@ namespace Expeditions
             if (enemy.Hp < 0)
                 return;
             var closestA = _advPositions.OrderBy(x => x).FirstOrDefault();
-            var enIndex = _advPositions.Find(x => x == closestA); //TODO: better targeting
+            var enIndex = _advPositions.IndexOf(closestA); //TODO: better targeting
             var adv = _adventurers[enIndex];
             if (_enPositions[eIndex] == closestA)
             {
@@ -265,7 +265,7 @@ namespace Expeditions
                         enemy.Ammo--;
                 }
 
-                _enPositions[eIndex] += movement;
+                _enPositions[eIndex] -= movement;
                 _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
             }
         }

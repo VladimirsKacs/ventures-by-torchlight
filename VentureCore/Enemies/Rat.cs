@@ -17,7 +17,6 @@ namespace VentureCore.Enemies
             Name = "Rat";
             LootTable = new LootTable( 
             new Dictionary<Item, int>{
-                {null, 10 },
                 {new SmallBone(),20 },
                 {new RatTeeh(), 20 },
                 {new RatTail(), 20 },

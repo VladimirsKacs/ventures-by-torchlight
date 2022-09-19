@@ -6,7 +6,7 @@ namespace VentureCore
 {
     public abstract class Melee:Weapon
     {
-        new public void Eqiup(Adventurer adventurer)
+        override public void Eqiup(Adventurer adventurer)
         {
             base.Eqiup(adventurer);
             if (adventurer.Melee != null)
@@ -14,7 +14,7 @@ namespace VentureCore
             adventurer.Melee = this;
         }
 
-        new public void Unequip(Adventurer adventurer)
+        override public void Unequip(Adventurer adventurer)
         {
             base.Unequip(adventurer);
             adventurer.Melee = null;
