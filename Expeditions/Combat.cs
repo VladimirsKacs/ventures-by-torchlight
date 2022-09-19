@@ -235,7 +235,7 @@ namespace Expeditions
             else
             {
                 var movement = _random.Next(enemy.Agility) + 1;
-                var range = closestA - _enPositions[eIndex];
+                var range = _enPositions[eIndex] - closestA;
                 if (enemy.Ammo > 0)
                 {
                     movement = (movement + 1) / 2;
@@ -265,7 +265,13 @@ namespace Expeditions
                         enemy.Ammo--;
                 }
 
-                _enPositions[eIndex] -= movement;
+                if (_enPositions[eIndex] - movement > closestA)
+                    _enPositions[eIndex] -= movement;
+                else
+                {
+                    movement = _enPositions[eIndex] - closestA;
+                    _enPositions[eIndex] = closestA;
+                }
                 _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
             }
         }

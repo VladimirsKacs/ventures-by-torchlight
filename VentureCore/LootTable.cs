@@ -27,7 +27,7 @@ namespace VentureCore
         {
             var random = _random.Next(_sum);
             for (var i = 0; i < _loot.Count; i++)
-                if (_loot[i].Item2 > i)
+                if (_loot[i].Item2 > random)
                 {
                     if (_loot[i].Item1 == null)
                         return new List<Item>();
