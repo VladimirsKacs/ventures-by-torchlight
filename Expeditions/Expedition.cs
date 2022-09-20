@@ -13,14 +13,14 @@ namespace Expeditions
     {
 
         public List<Item> Loot = new List<Item>();
+        Random _random = new Random();
 
         public string Go(List<Adventurer> adventurers, Location location)
         {
             StringBuilder log = new StringBuilder();
-            var rand = new Random();
             for (var i = 0; i < 5; i++)
             {
-                switch (rand.Next(4))
+                switch (_random.Next(4))
                 {
                     case 0:
                     case 1:
@@ -53,27 +53,27 @@ namespace Expeditions
                         case 0:
                         case 1:
                         case 2:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat {Count=1 }  }, 100);
-                            loots.Add(new Rat().LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) {Count=1 }  }, 100, _random);
+                            loots.Add(new Rat((_random)).LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 3:
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime { Count = 1 } }, 100);
-                            loots.Add(new Slime().LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) { Count = 1 } }, 100, _random);
+                            loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat { Count = 1 }, new Slime { Count = 1 } }, 100);
-                            loots.Add(new Rat().LootTable);
-                            loots.Add(new Slime().LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) { Count = 1 }, new Slime(_random) { Count = 1 } }, 100, _random);
+                            loots.Add(new Rat((_random)).LootTable);
+                            loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a rat and a green slime");
                             break;
                     }
                     break;
                 default:
-                    combat= new Combat(adventurers, new List<Enemy> { new Rat(), new Slime() }, 100);
+                    combat= new Combat(adventurers, new List<Enemy> { new Rat(_random), new Slime(_random) }, 100);
                     break;
             }
             if (combat.Fight() == FightResult.Win)
@@ -130,7 +130,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 10 }
-                    });
+                    },_random);
                     sb.Append("You search through the trash and find ");
                     break;
             }
@@ -165,7 +165,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 5 }
-                    });
+                    }, _random);
                     sb.AppendLine("You find a chest...");
                     break;
             }
@@ -192,7 +192,7 @@ namespace Expeditions
                     success = true;
                 }
                 else
-                    sb.AppendLine("You attmept to pick the lock, but fail");
+                    sb.AppendLine("You attempt to pick the lock, but fail");
             }
 
             if (breaker != null && !success)
@@ -203,7 +203,7 @@ namespace Expeditions
                     success = true;
                 }
                 else
-                    sb.AppendLine("You attmept to break the lock, but it's too sturdy.");
+                    sb.AppendLine("You attempt to break the lock, but it's too sturdy.");
             }
             if (success)
             {

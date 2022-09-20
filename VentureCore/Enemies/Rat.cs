@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VentureCore.VendorTrash;
 
 namespace VentureCore.Enemies
 {
     public class Rat:Enemy
     {
-        public Rat()
+        public Rat(Random random)
         {
             Strength = 5;
             Agility = 10;
@@ -27,7 +28,7 @@ namespace VentureCore.Enemies
                 {new Groshen(),1 },
                 {new Florin(),1 },
                 {new Again(), 10 }
-            });
+            }, random);
         }
     }
 }

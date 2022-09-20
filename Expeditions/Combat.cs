@@ -20,7 +20,7 @@ namespace Expeditions
         public string Log => _log.ToString();
         readonly StringBuilder _log = new StringBuilder();
 
-        public Combat(List<Adventurer> adventurers, List<Enemy> enemies, int distance)
+        public Combat(List<Adventurer> adventurers, List<Enemy> enemies, int distance, Random random = null)
         {
             _adventurers = adventurers;
             _enemies = enemies;
@@ -30,7 +30,7 @@ namespace Expeditions
                 _advPositions.Add(0);
             foreach (var enemy in enemies)
                 _enPositions.Add(distance);
-            _random = new Random();
+            _random = random ?? new Random();
         }
 
         public FightResult Fight()
@@ -66,7 +66,7 @@ namespace Expeditions
             if (_advPositions[advIndex] == closestE)
             {
                 var melee = adventurer.Melee ?? new Fists();
-                _log.Append(adventurer.Name + " attacks " + enemy.Name + "with " + melee.Name);
+                _log.Append(adventurer.Name + " attacks " + enemy.Name + " with " + melee.Name);
                 var roll = _random.Next(20);
                 var adjustedArmor = enemy.Armor;
                 switch (melee.Piercing)
@@ -88,7 +88,7 @@ namespace Expeditions
                     var damage = melee.Add;
                     for (var i = 0; i < melee.Dice; i++)
                         damage += _random.Next(melee.Sides) + 1;
-                    _log.AppendLine("and hits for "+damage+" damage.");
+                    _log.AppendLine(" and hits for "+damage+" damage.");
                     enemy.Hp -= damage;
                     if (enemy.Hp <= 0)
                     {
@@ -107,7 +107,7 @@ namespace Expeditions
                 }
                 else
                 {
-                    _log.AppendLine("but misses.");
+                    _log.AppendLine(" but misses.");
                 }
             }
             else
@@ -125,7 +125,7 @@ namespace Expeditions
                     }
                     else
                     {
-                        _log.Append(adventurer.Name + " attacks " + enemy.Name + "with " + ranged.Name + " from " + range + " feet ");
+                        _log.Append(adventurer.Name + " attacks " + enemy.Name + " with " + ranged.Name + " from " + range + " feet ");
                         var roll = _random.Next(20);
                         var adjustedArmor = enemy.Armor;
                         switch (ranged.Piercing)
@@ -210,7 +210,7 @@ namespace Expeditions
             var adv = _adventurers[enIndex];
             if (_enPositions[eIndex] == closestA)
             {
-                _log.Append(enemy.Name + " attacks " + adv.Name + "with " + enemy.MeleeName);
+                _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.MeleeName);
                 var roll = _random.Next(20);
                 var adjustedArmor = adv.Armor;
                 var adjustedStrength = enemy.Strength;
@@ -219,7 +219,7 @@ namespace Expeditions
                     var damage = enemy.MeleeAdd;
                     for (var i = 0; i < enemy.MeleeDice; i++)
                         damage += _random.Next(enemy.MeleeSides) + 1;
-                    _log.AppendLine("and hits for " + damage + " damage.");
+                    _log.AppendLine(" and hits for " + damage + " damage.");
                     adv.Hp -= damage;
                     if (adv.Hp <= 0)
                     {
@@ -229,7 +229,7 @@ namespace Expeditions
                 }
                 else
                 {
-                    _log.AppendLine("but misses.");
+                    _log.AppendLine(" but misses.");
                 }
             }
             else
@@ -239,7 +239,7 @@ namespace Expeditions
                 if (enemy.Ammo > 0)
                 {
                     movement = (movement + 1) / 2;
-                        _log.Append(enemy.Name + " attacks " + adv.Name + "with " + enemy.RangedName + " from " + range + " feet ");
+                        _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.RangedName + " from " + range + " feet ");
                         var roll = _random.Next(20);
                         var adjustedArmor = adv.Armor;
                         var rangeIncrements = range / enemy.RangeIncement;
@@ -249,7 +249,7 @@ namespace Expeditions
                             var damage = enemy.RangedAdd;
                             for (var i = 0; i < enemy.RangedDice; i++)
                                 damage += _random.Next(enemy.MeleeSides) + 1;
-                            _log.AppendLine("and hits for " + damage + " damage.");
+                            _log.AppendLine(" and hits for " + damage + " damage.");
                             adv.Hp -= damage;
                             if (adv.Hp <= 0)
                             {
@@ -259,7 +259,7 @@ namespace Expeditions
                         }
                         else
                         {
-                            _log.AppendLine("but misses.");
+                            _log.AppendLine(" but misses.");
                         }
 
                         enemy.Ammo--;

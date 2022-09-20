@@ -32,7 +32,7 @@ namespace Expeditions
         {
             var equipDlg = new Equip();
             if (equipDlg.ShowDialog() == true)
-                equipDlg.Selected.Eqiup(Adventurer);
+                equipDlg.Selected.Equip(Adventurer);
         }
 
         Adventurer Adventurer { get; }

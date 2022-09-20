@@ -11,7 +11,7 @@ namespace VentureCore
         int _sum;
         Random _random;
 
-        public LootTable(Dictionary<Item,int> dic)
+        public LootTable(Dictionary<Item,int> dic, Random random = null)
         {
             _sum = 0;
             _loot = new List<Tuple<Item, int>>();
@@ -20,7 +20,7 @@ namespace VentureCore
                 _sum += kvp.Value;
                 _loot.Add(new Tuple<Item,int>(kvp.Key, _sum));
             }
-            _random = new Random();
+            _random = random ?? new Random();
         }
 
         public List<Item> GetItems()

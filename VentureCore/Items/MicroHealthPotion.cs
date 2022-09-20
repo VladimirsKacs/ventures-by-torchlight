@@ -14,7 +14,7 @@ namespace VentureCore.Items
 
         public override int Value => 10;
 
-        new public void Use(Adventurer adventurer)
+        public new void Use(Adventurer adventurer)
         {
             base.Use(adventurer);
             if (adventurer.Hp < adventurer.HpMax)

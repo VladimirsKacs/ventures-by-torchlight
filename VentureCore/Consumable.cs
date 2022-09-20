@@ -16,13 +16,13 @@ namespace VentureCore
                 Unequip(adventurer);
         }
 
-        new public void Eqiup(Adventurer adventurer)
+        public new void Equip(Adventurer adventurer)
         {
-            base.Eqiup(adventurer);
+            base.Equip(adventurer);
             Charges = ChargesMax;
         }
 
-        new public string Print()
+        public override string Print()
         {
             var sb = new StringBuilder();
             sb.AppendLine("[table]");

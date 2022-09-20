@@ -4,6 +4,8 @@ using System.Text;
 using VentureCore;
 using Newtonsoft.Json;
 using System.IO;
+using VentureCore.Items;
+using VentureCore.Weapons;
 
 namespace CharGen
 {
@@ -11,9 +13,10 @@ namespace CharGen
     {
         static void Main(string[] args)
         {
-            var adv = CharGen();
-            Console.WriteLine(adv.Print());
-            Save(adv);
+            //var adv = CharGen();
+            //Console.WriteLine(adv.Print());
+            //Save(adv);
+            PrintStore();
             Console.ReadKey();
         }
 
@@ -28,6 +31,15 @@ namespace CharGen
             writer.Write(advStr);
             writer.Flush();
             writer.Close();
+        }
+
+        static void PrintStore()
+        {
+            Console.WriteLine(new MicroHealthPotion().Print());
+            Console.WriteLine(new LockPick().Print());
+            Console.WriteLine(new MinorHealthPotion().Print());
+            Console.WriteLine(new LeatherArmor().Print());
+            Console.WriteLine(new PlateArmor().Print());
         }
 
         static Adventurer CharGen()

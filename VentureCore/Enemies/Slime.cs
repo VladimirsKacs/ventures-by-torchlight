@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VentureCore.VendorTrash;
 
 namespace VentureCore.Enemies
 {
     public class Slime:Enemy
     {
-        public Slime()
+        public Slime(Random random)
         {
             Strength = 4;
             Agility = 5;
@@ -19,7 +20,7 @@ namespace VentureCore.Enemies
             {
                 { new GreenGoo(), 1 },
                 { new Again(), 1 }
-            });
+            }, random);
         }
     }
 }
