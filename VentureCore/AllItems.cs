@@ -10,8 +10,10 @@ namespace VentureCore
         public static List<Item> Items => new List<Item>
         {
             new Backpack(),
+            new Crowbar(),
             new LeatherArmor(),
-            new PlateArmor()
+            new LockPick(),
+            new PlateArmor(),
         };
         public static List<Item> Consumables => new List<Item>
         {

@@ -32,7 +32,11 @@ namespace VentureCore
                     if (_loot[i].Item1 == null)
                         return new List<Item>();
                     if (typeof(Again) == _loot[i].Item1.GetType())
-                        return GetItems().Concat(GetItems()).ToList();
+                    {
+                        var tmp = GetItems();
+                        tmp.AddRange(GetItems());
+                        return tmp;
+                    }
                     return new List<Item> { _loot[i].Item1 };
                 }
             return new List<Item>();

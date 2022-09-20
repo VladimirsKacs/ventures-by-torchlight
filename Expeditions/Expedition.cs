@@ -18,7 +18,7 @@ namespace Expeditions
         public string Go(List<Adventurer> adventurers, Location location)
         {
             StringBuilder log = new StringBuilder();
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i < _random.Next(4,8); i++)
             {
                 switch (_random.Next(4))
                 {
@@ -42,30 +42,29 @@ namespace Expeditions
         {
             var sb = new StringBuilder();
             sb.Append("as you explore, you run into ");
-            var rand = new Random();
             Combat combat;
             List<LootTable> loots= new List<LootTable>();
             switch (location)
             {
-                case Location.Basic_1:
-                    switch(rand.Next(7))
+                case Location.Overgrown_1:
+                    switch(_random.Next(7))
                     {
                         case 0:
                         case 1:
                         case 2:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) {Count=1 }  }, 100, _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) {Count=1 }  }, _random.Next(75,125), _random);
                             loots.Add(new Rat((_random)).LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 3:
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) { Count = 1 } }, 100, _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) { Count = 1 } }, _random.Next(75, 125), _random);
                             loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) { Count = 1 }, new Slime(_random) { Count = 1 } }, 100, _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) { Count = 1 }, new Slime(_random) { Count = 1 } }, _random.Next(75, 125), _random);
                             loots.Add(new Rat((_random)).LootTable);
                             loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a rat and a green slime");
@@ -73,10 +72,10 @@ namespace Expeditions
                     }
                     break;
                 default:
-                    combat= new Combat(adventurers, new List<Enemy> { new Rat(_random), new Slime(_random) }, 100);
-                    break;
+                    return String.Empty;
             }
-            if (combat.Fight() == FightResult.Win)
+            var result = combat.Fight();
+            if (result == FightResult.Win)
             {
                 sb.Append(combat.Log);
                 sb.AppendLine("having defeated the enemy, you search their corpses.");
@@ -99,7 +98,7 @@ namespace Expeditions
                 Loot.AddRange(loot);
                 return sb.ToString();
             }
-            else if(combat.Fight() == FightResult.Draw)
+            else if(result == FightResult.Draw)
             {
                 sb.Append(combat.Log);
                 sb.AppendLine("Exhausted by the fight, you leave each other alone.");
@@ -121,7 +120,7 @@ namespace Expeditions
             LootTable lootTable = null;
             switch (location)
             {
-                case Location.Basic_1:
+                case Location.Overgrown_1:
                     lootTable = new LootTable( new Dictionary<Item, int>
                     {
                         {new Nail(), 40},
@@ -129,21 +128,22 @@ namespace Expeditions
                         {new Pfennig(), 10 },
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
-                        {new Again(), 10 }
+                        {new Again(), 25 }
                     },_random);
-                    sb.Append("You search through the trash and find ");
+                    sb.AppendLine("As you walk through the cave you notice something underfoot.");
+                    sb.Append("You search through the dirt and find ");
                     break;
             }
 
             var loot = lootTable.GetItems();
-            var separator = "";
+            var separator = " a ";
             if (!loot.Any())
                 sb.Append("nothing");
             foreach (var l in loot)
             {
                 sb.Append(separator);
                 sb.Append(l.Name);
-                separator = ", ";
+                separator = ", a ";
             }
             sb.AppendLine(".");
             Loot.AddRange(loot);
@@ -156,7 +156,7 @@ namespace Expeditions
             LootTable lootTable = null;
             switch (location)
             {
-                case Location.Basic_1:
+                case Location.Overgrown_1:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 5},
@@ -164,7 +164,7 @@ namespace Expeditions
                         {new Pfennig(), 10 },
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
-                        {new Again(), 5 }
+                        {new Again(), 15 }
                     }, _random);
                     sb.AppendLine("You find a chest...");
                     break;
@@ -210,16 +210,16 @@ namespace Expeditions
                 var loot = new List<Item>();
                 for (var i =0; i<lootMultiplier; i++)
                 {
-                    loot.Concat(lootTable.GetItems()).ToList();
+                    loot.AddRange(lootTable.GetItems());
                 }
-                var separator = "";
+                var separator = " a ";
                 if (!loot.Any())
                     sb.Append("it empty");
                 foreach (var l in loot)
                 {
                     sb.Append(separator);
                     sb.Append(l.Name);
-                    separator = ", ";
+                    separator = ", a ";
                 }
                 sb.AppendLine(".");
                 Loot.AddRange(loot);

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Expeditions"
         xmlns:c="clr-namespace:VentureCore;assembly=VentureCore"
         mc:Ignorable="d"
-        Title="Equip" Height="800" Width="400">
+        Title="Equip" Height="500" Width="400">
     <Window.Resources>
         <c:AllItems x:Key="AllItems"/>
     </Window.Resources>
@@ -15,8 +15,8 @@
     </Window.DataContext>
     <Grid>
         <ListBox  HorizontalAlignment="Stretch" Margin="0,10,0,50" VerticalAlignment="Stretch" ItemsSource="{Binding All}" Name="Box"/>
-        <Button Content="Equip" HorizontalAlignment="Left" Margin="309,725,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="209,725,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="Equip" HorizontalAlignment="Left" Margin="309,425,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="209,425,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

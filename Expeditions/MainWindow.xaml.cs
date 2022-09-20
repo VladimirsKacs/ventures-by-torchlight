@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using Microsoft.Win32;
 using VentureCore;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace Expeditions
 {
@@ -39,9 +40,59 @@ namespace Expeditions
         {
             var expedition = new Expedition();
             //TODO: get this from a drop-down list.
-            var log = new Log(expedition.Go(_adventurers, Location.Basic_1));
-            log.Show();
+            var eventLog = new Log(expedition.Go(_adventurers, Location.Overgrown_1));
+            eventLog.Show();
+            var loot = PrintLoot(expedition.Loot);
+            var lootLog = new Log(loot);
+            lootLog.Show();
         }
+
+        string PrintLoot(List<Item> loot)
+        {
+            loot.Sort(Comparer<Item>.Create(Compare));
+            var sb = new StringBuilder();
+            var counter = 0;
+            var totalValue = 0;
+            Item previous=loot[0];
+            var type = previous.Name;
+            foreach (var l in loot)
+            {
+                if (type == l.Name)
+                    counter++;
+                else
+                {
+                    sb.AppendLine("[table]");
+                    sb.AppendLine($"[tr][td][b]Value:[/b][/td][td]{previous.Value / 100.0}₣[/td][/tr]");
+                    sb.AppendLine($"[tr][td][b]Amount:[/b][/td][td]{counter}[/td][/tr]");
+                    sb.AppendLine($"[tr][td][/td][td][/td][td][b][u]Name:[/u][/b][/td][td]{previous.Name}[/td][/tr]");
+                    sb.AppendLine($"[tr][td][/td][td][/td][td][b]Encumbrance:[/b][/td][td]{previous.Weight}[/td][td] | [/td][td][b]Consumable:[/b][/td][td]No[/td][/tr]");
+                    sb.AppendLine("[/table]");
+                    sb.AppendLine($"    [b]Description:[/b] {previous.Description}");
+                    sb.AppendLine("[hr]");
+                    totalValue += counter * previous.Value;
+                    counter = 1;
+                    type = l.Name;
+                    previous = l;
+                }
+            }
+            sb.AppendLine("[table]");
+            sb.AppendLine($"[tr][td][b]Value:[/b][/td][td]{previous.Value / 100.0}₣[/td][/tr]");
+            sb.AppendLine($"[tr][td][b]Amount:[/b][/td][td]{counter}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b][u]Name:[/u][/b][/td][td]{previous.Name}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Encumbrance:[/b][/td][td]{previous.Weight}[/td][td] | [/td][td][b]Consumable:[/b][/td][td]No[/td][/tr]");
+            sb.AppendLine("[/table]");
+            sb.AppendLine($"    [b]Description:[/b] {previous.Description}");
+            sb.AppendLine("[hr]");
+            totalValue += counter * previous.Value;
+            sb.AppendLine($"Total Value: {totalValue / 100.0}₣");
+            return sb.ToString();
+        }
+
+        int Compare(Item a, Item b)
+        {
+            return a.Name.CompareTo(b.Name);
+        }
+
 
         private void Button_Save(object sender, RoutedEventArgs e)
         {

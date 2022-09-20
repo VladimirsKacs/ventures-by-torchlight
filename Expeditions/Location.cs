@@ -2,6 +2,6 @@
 {
     public enum Location
     {
-        Basic_1
+        Overgrown_1
     }
 }

@@ -27,7 +27,7 @@ namespace VentureCore.Enemies
                 {new Pfennig(),2 },
                 {new Groshen(),1 },
                 {new Florin(),1 },
-                {new Again(), 10 }
+                {new Again(), 25 }
             }, random);
         }
     }

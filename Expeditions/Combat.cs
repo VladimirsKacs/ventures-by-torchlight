@@ -90,20 +90,7 @@ namespace Expeditions
                         damage += _random.Next(melee.Sides) + 1;
                     _log.AppendLine(" and hits for "+damage+" damage.");
                     enemy.Hp -= damage;
-                    if (enemy.Hp <= 0)
-                    {
-                        enemy.Count -= 1;
-                        enemy.Hp = enemy.HpMax;
-                        if (enemy.Count > 0)
-                            _log.AppendLine("One of the "+enemy.Name+"s dies. "+enemy.Count+" remain.");
-                        else 
-                            _log.Append(enemy.Name + " dies.");
-                        if (enemy.Count <= 0)
-                        {
-                            _enemies.Remove(enemy);
-                            _enPositions.RemoveAt(enIndex);
-                        }
-                    }
+                    CheckDead(enemy, enIndex);
                 }
                 else
                 {
@@ -150,20 +137,7 @@ namespace Expeditions
                                 damage += _random.Next(ranged.Sides) + 1;
                             _log.AppendLine("and hits for " + damage + " damage.");
                             enemy.Hp -= damage;
-                            if (enemy.Hp <= 0)
-                            {
-                                enemy.Count -= 1;
-                                enemy.Hp = enemy.HpMax;
-                                if (enemy.Count > 0)
-                                    _log.AppendLine("One of the " + enemy.Name + "s dies. " + enemy.Count + " remain.");
-                                else
-                                    _log.Append(enemy.Name + " dies.");
-                                if (enemy.Count == 0)
-                                {
-                                    _enemies.Remove(enemy);
-                                    _enPositions.RemoveAt(enIndex);
-                                }
-                            }
+                            CheckDead(enemy, enIndex);
                         }
                         else
                         {
@@ -181,22 +155,30 @@ namespace Expeditions
                     }
                 }
 
-                if (range > adventurer.IdealRange)
+                if (adventurer.Ranged != null && adventurer.Ranged.Ammo > 0)
                 {
-                    if(range - movement<= adventurer.IdealRange)
-                        movement = range - adventurer.IdealRange;
+                    if (range > adventurer.IdealRange)
+                    {
+                        if (range - movement <= adventurer.IdealRange)
+                            movement = range - adventurer.IdealRange;
+                        _advPositions[advIndex] += movement;
+                        _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name + " (they are now " + (range - movement) + " feet apart.)");
+                    }
+                    else if (range < adventurer.IdealRange)
+                    {
+                        if (range + movement >= adventurer.IdealRange)
+                            movement = adventurer.IdealRange - range;
+                        _advPositions[advIndex] -= movement;
+                        _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name + " (they are now " + (range + movement) + " feet apart.)");
+                    }
+                }
+                else
+                {
+                    if (range - movement <= 0)
+                        movement = range;
                     _advPositions[advIndex] += movement;
-                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name + " (they are now " + (range - movement) + " feet apart.)" );
+                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name + " (they are now " + (range - movement) + " feet apart.)");
                 }
-                else if (range < adventurer.IdealRange)
-                {
-                    if (range + movement >= adventurer.IdealRange)
-                        movement = adventurer.IdealRange - range;
-                    _advPositions[advIndex] -= movement;
-                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name + " (they are now " + (range + movement) + " feet apart.)");
-                }
-
-
             }
         }
 
@@ -223,8 +205,9 @@ namespace Expeditions
                     adv.Hp -= damage;
                     if (adv.Hp <= 0)
                     {
-                            _adventurers.Remove(adv);
-                            _advPositions.RemoveAt(enIndex);
+                        _log.AppendLine($"{adv.Name} dies.");
+                        _adventurers.Remove(adv);
+                        _advPositions.RemoveAt(enIndex);
                     }
                 }
                 else
@@ -253,8 +236,9 @@ namespace Expeditions
                             adv.Hp -= damage;
                             if (adv.Hp <= 0)
                             {
-                                    _adventurers.Remove(adv);
-                                    _advPositions.RemoveAt(enIndex);
+                                _log.AppendLine($"{adv.Name} dies.");
+                                _adventurers.Remove(adv);
+                                _advPositions.RemoveAt(enIndex);
                             }
                         }
                         else
@@ -274,6 +258,32 @@ namespace Expeditions
                 }
                 _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
             }
+        }
+
+        void CheckDead (Enemy enemy, int eIndex)
+        {
+            if (enemy.Hp <= 0)
+            {
+                enemy.Count -= 1;
+                enemy.Hp = enemy.HpMax;
+                if (enemy.Count > 0)
+                    _log.AppendLine("One of the " + enemy.Name + "s dies. " + enemy.Count + " remain.");
+                else
+                    _log.AppendLine(enemy.Name + " dies.");
+                if (enemy.Count <= 0)
+                {
+                    _enemies.Remove(enemy);
+                    _enPositions.RemoveAt(eIndex);
+                }
+                AwardXP(enemy);
+            }
+        }
+
+        void AwardXP(Enemy enemy)
+        {
+            var xp = enemy.Xp / _adventurers.Count;
+            foreach (var adv in _adventurers)
+                adv.Xp += xp;
         }
 
         bool InRange(Adventurer adventurer, int distance)

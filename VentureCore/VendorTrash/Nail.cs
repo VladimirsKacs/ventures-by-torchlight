@@ -8,6 +8,6 @@
 
         public override string Description => "A somewhat rusty, but unbent, nail";
 
-        public override string Name => "nail";
+        public override string Name => "Nail";
     }
 }
