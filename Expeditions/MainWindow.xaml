@@ -12,5 +12,6 @@
         <Button Content="Load Adventurer" HorizontalAlignment="Left" Margin="688,491,0,0" VerticalAlignment="Top" Width="96" Click="Button_Load"/>
         <Button Content="Adventure" HorizontalAlignment="Left" Margin="608,491,0,0" VerticalAlignment="Top" Width="75" Click="Button_Adventure"/>
         <Button Content="Save Adventurers" HorizontalAlignment="Left" Margin="688,466,0,0" VerticalAlignment="Top" Width="96" Click="Button_Save"/>
+        <ComboBox HorizontalAlignment="Left" Margin="563,442,0,0" VerticalAlignment="Top" Width="120" Name="DestinationBox"/>
     </Grid>
 </Window>

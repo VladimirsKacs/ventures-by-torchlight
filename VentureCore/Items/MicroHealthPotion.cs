@@ -12,7 +12,7 @@ namespace VentureCore.Items
         public override string Name => "One hit potion";
         public override string Description => "There's some health potion left at the bottom of this vial. It could heal 1 hitpoint.";
 
-        public override int Value => 10;
+        public override int Value => 30;
 
         public new void Use(Adventurer adventurer)
         {

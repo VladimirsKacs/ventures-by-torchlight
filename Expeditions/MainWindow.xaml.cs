@@ -19,6 +19,7 @@ namespace Expeditions
         public MainWindow()
         {
             InitializeComponent();
+            DestinationBox.ItemsSource= Enum.GetValues(typeof(Location));
         }
 
         private void Button_Load(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace Expeditions
         {
             var expedition = new Expedition();
             //TODO: get this from a drop-down list.
-            var eventLog = new Log(expedition.Go(_adventurers, Location.Overgrown_1));
+            var eventLog = new Log(expedition.Go(_adventurers, (Location)DestinationBox.SelectedItem));
             eventLog.Show();
             var loot = PrintLoot(expedition.Loot);
             var lootLog = new Log(loot);
@@ -49,6 +50,8 @@ namespace Expeditions
 
         string PrintLoot(List<Item> loot)
         {
+            if (loot.Count == 0)
+                return "Nothing";
             loot.Sort(Comparer<Item>.Create(Compare));
             var sb = new StringBuilder();
             var counter = 0;

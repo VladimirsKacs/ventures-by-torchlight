@@ -14,7 +14,7 @@ namespace VentureCore.Items
 
         public override string Description => "A weaker formulation of the health potion. Can heal 1d3+1 hp.";
 
-        public override int Value => 25;
+        public override int Value => 75;
 
         public new void Use(Adventurer adventurer)
         {
