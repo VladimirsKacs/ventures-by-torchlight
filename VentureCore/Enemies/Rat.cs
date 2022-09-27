@@ -18,16 +18,16 @@ namespace VentureCore.Enemies
             Name = "Rat";
             LootTable = new LootTable( 
             new Dictionary<Item, int>{
-                {new SmallBone(),20 },
-                {new RatTeeh(), 20 },
-                {new RatTail(), 20 },
-                {new RatHide(), 10 },
-                {new RatSkull(), 5 },
-                {new SandPaper(),2 },
-                {new Pfennig(),2 },
-                {new Groshen(),1 },
-                {new Florin(),1 },
-                {new Again(), 25 }
+                {new SmallBone(),200 },
+                {new RatTeeh(), 200 },
+                {new RatTail(), 200 },
+                {new RatHide(), 100 },
+                {new RatSkull(), 50 },
+                {new SandPaper(),20 },
+                {new Pfennig(),20 },
+                {new Groshen(),10 },
+                {new Florin(),5 },
+                {new Again(), 250 }
             }, random);
         }
     }

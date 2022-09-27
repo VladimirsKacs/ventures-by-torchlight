@@ -40,24 +40,33 @@ namespace Expeditions
         private void Button_Adventure(object sender, RoutedEventArgs e)
         {
             var expedition = new Expedition();
-            //TODO: get this from a drop-down list.
-            var eventLog = new Log(expedition.Go(_adventurers, (Location)DestinationBox.SelectedItem));
-            eventLog.Show();
-            var loot = PrintLoot(expedition.Loot);
-            var lootLog = new Log(loot);
-            lootLog.Show();
+            var sb = new StringBuilder();
+            sb.AppendLine("[spoiler=Adventurers]");
+            foreach (var adv in _adventurers)
+            {
+                sb.Append(adv.Print());
+            }
+
+            sb.AppendLine("[/spoiler]");
+            sb.AppendLine("[spoiler=Log]");
+            sb.Append(expedition.Go(_adventurers, (Location)DestinationBox.SelectedItem));
+            sb.AppendLine("[/spoiler]");
+            sb.AppendLine(PrintLoot(expedition.Loot));
+            var log = new Log(sb.ToString());
+            log.Show();
         }
 
         string PrintLoot(List<Item> loot)
         {
             if (loot.Count == 0)
-                return "Nothing";
+                return "No Loot";
             loot.Sort(Comparer<Item>.Create(Compare));
             var sb = new StringBuilder();
             var counter = 0;
             var totalValue = 0;
             Item previous=loot[0];
             var type = previous.Name;
+            sb.AppendLine("[spoiler=Loot]");
             foreach (var l in loot)
             {
                 if (type == l.Name)
@@ -85,8 +94,8 @@ namespace Expeditions
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Encumbrance:[/b][/td][td]{previous.Weight}[/td][td] | [/td][td][b]Consumable:[/b][/td][td]No[/td][/tr]");
             sb.AppendLine("[/table]");
             sb.AppendLine($"    [b]Description:[/b] {previous.Description}");
-            sb.AppendLine("[hr]");
             totalValue += counter * previous.Value;
+            sb.AppendLine("[/spoiler]");
             sb.AppendLine($"Total Value: {totalValue / 100.0}₣");
             return sb.ToString();
         }

@@ -40,6 +40,11 @@ namespace Expeditions
                 }
             }
 
+            foreach (var adventurer in adventurers)
+            {
+                adventurer.Servitude--;
+            }
+
             return log.ToString();
         }
 

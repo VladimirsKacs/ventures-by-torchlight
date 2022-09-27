@@ -29,11 +29,12 @@ namespace VentureCore
 
         public int IdealRange { get; set; }
 
-        public string Print()
+        public string Print(int bid = 0)
         {
             var sb = new StringBuilder();
             sb.AppendLine("[table]");
-            sb.AppendLine("[tr][td][b]Entry Bid:[/b][/td][td]3F[/td][td][/td][td][/td][/tr]");
+            if(bid > 0)
+                sb.AppendLine($"[tr][td][b]Entry Bid:[/b][/td][td]{bid/100.0}F[/td][td][/td][td][/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b][u]Name:[/u][/b][/td][td]{Name}[/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]HP (max):[/b][/td][td]{Hp}({HpMax})[/td][td]  |  [/td][td][b]Armor Class:[/b][/td][td]{Armor}[/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Strength:[/b][/td][td]{Strength}[/td][td]  |  [/td][td][b]Dexterity:[/b][/td][td]{Dexterity}[/td][/tr]");
