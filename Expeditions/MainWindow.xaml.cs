@@ -42,9 +42,12 @@ namespace Expeditions
             var expedition = new Expedition();
             var sb = new StringBuilder();
             sb.AppendLine("[spoiler=Adventurers]");
+            var separator = string.Empty;
             foreach (var adv in _adventurers)
             {
+                sb.Append(separator);
                 sb.Append(adv.Print());
+                separator = "[hr]\n";
             }
 
             sb.AppendLine("[/spoiler]");
@@ -117,6 +120,12 @@ namespace Expeditions
                 });
                 File.WriteAllText(fileName, advStr);
             }
+        }
+
+        private void Button_Clear(object sender, RoutedEventArgs e)
+        {
+            Tabs.Items.Clear();
+            _adventurers.Clear();
         }
     }
 }
