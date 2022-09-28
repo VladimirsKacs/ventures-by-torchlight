@@ -64,19 +64,19 @@ namespace Expeditions
                         case 0:
                         case 1:
                         case 2:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) {Count=1 }  }, _random.Next(75,125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random)  }, _random.Next(75,125), _random);
                             loots.Add(new Rat((_random)).LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 3:
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) }, _random.Next(75, 125), _random);
                             loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) { Count = 1 }, new Slime(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random), new Slime(_random) }, _random.Next(75, 125), _random);
                             loots.Add(new Rat((_random)).LootTable);
                             loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a rat and a green slime");
@@ -89,24 +89,24 @@ namespace Expeditions
                     {
                         case 0:
                         case 1:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) }, _random.Next(75, 125), _random);
                             loots.Add(new Rat((_random)).LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 2:
                         case 3:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) }, _random.Next(75, 125), _random);
                             loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Cat(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Cat(_random) }, _random.Next(75, 125), _random);
                             loots.Add(new Cat((_random)).LootTable);
                             sb.AppendLine("a feral cat.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) { Count = 1 }, new Slime(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random), new Slime(_random) }, _random.Next(75, 125), _random);
                             loots.Add(new Rat((_random)).LootTable);
                             loots.Add(new Slime((_random)).LootTable);
                             sb.AppendLine("a rat and a green slime");
@@ -114,7 +114,7 @@ namespace Expeditions
                     }
                     break;
                 case Location.Overgrown_Boss:
-                    combat = new Combat(adventurers, new List<Enemy> { new Wolf(_random) { Count = 1 } }, _random.Next(75, 125), _random);
+                    combat = new Combat(adventurers, new List<Enemy> { new Wolf(_random) }, _random.Next(75, 125), _random);
                     loots.Add(new Wolf((_random)).LootTable);
                     sb.AppendLine("a large wolf");
                     break;

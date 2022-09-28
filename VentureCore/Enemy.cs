@@ -11,7 +11,6 @@ namespace VentureCore
         public int Agility { get; set; }
         public int Hp { get; set; }
         public int HpMax { get; set; }
-        public int Count { get; set; }
         public int MeleeDice { get; set; }
         public int MeleeSides { get; set; }
         public int MeleeAdd { get; set; }

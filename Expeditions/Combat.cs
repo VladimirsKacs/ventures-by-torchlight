@@ -189,8 +189,8 @@ namespace Expeditions
             if (enemy.Hp < 0)
                 return;
             var closestA = _advPositions.OrderBy(x => x).FirstOrDefault();
-            var enIndex = _advPositions.IndexOf(closestA); //TODO: better targeting
-            var adv = _adventurers[enIndex];
+            var advIndex = _advPositions.IndexOf(closestA); //TODO: better targeting
+            var adv = _adventurers[advIndex];
             if (_enPositions[eIndex] == closestA)
             {
                 _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.MeleeName);
@@ -208,7 +208,7 @@ namespace Expeditions
                     {
                         _log.AppendLine($"{adv.Name} dies.");
                         _adventurers.Remove(adv);
-                        _advPositions.RemoveAt(enIndex);
+                        _advPositions.RemoveAt(advIndex);
                     }
                 }
                 else
@@ -239,7 +239,7 @@ namespace Expeditions
                             {
                                 _log.AppendLine($"{adv.Name} dies.");
                                 _adventurers.Remove(adv);
-                                _advPositions.RemoveAt(enIndex);
+                                _advPositions.RemoveAt(advIndex);
                             }
                         }
                         else
@@ -265,17 +265,9 @@ namespace Expeditions
         {
             if (enemy.Hp <= 0)
             {
-                enemy.Count -= 1;
-                enemy.Hp = enemy.HpMax;
-                if (enemy.Count > 0)
-                    _log.AppendLine("One of the " + enemy.Name + "s dies. " + enemy.Count + " remain.");
-                else
-                    _log.AppendLine(enemy.Name + " dies.");
-                if (enemy.Count <= 0)
-                {
-                    _enemies.Remove(enemy);
-                    _enPositions.RemoveAt(eIndex);
-                }
+                _log.AppendLine(enemy.Name + " dies.");
+                _enemies.Remove(enemy);
+                _enPositions.RemoveAt(eIndex);
                 AwardXP(enemy);
             }
         }
