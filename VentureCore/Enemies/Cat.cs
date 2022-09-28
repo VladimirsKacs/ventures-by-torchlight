@@ -18,14 +18,14 @@ namespace VentureCore.Enemies
             Name = "Cat";
             LootTable = new LootTable( 
             new Dictionary<Item, int>{
-                {new SmallBone(),20 },
-                {new CatHide(), 10 },
-                {new CatPaw(), 10 },
-                {new Nail(),2 },
-                {new Pfennig(),2 },
-                {new Groshen(),1 },
+                {new SmallBone(),40 },
+                {new CatHide(), 20 },
+                {new CatPaw(), 20 },
+                {new Nail(),5 },
+                {new Pfennig(),5 },
+                {new Groshen(),2 },
                 {new Florin(),1 },
-                {new Again(), 25 }
+                {new Again(), 65 }
             }, random);
         }
     }
