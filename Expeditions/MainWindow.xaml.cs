@@ -66,7 +66,7 @@ namespace Expeditions
         {
             if (loot.Count == 0)
                 return "No Loot";
-            loot.Sort(Comparer<Item>.Create(Compare));
+            loot.Sort((x,y)=>x.Name.CompareTo(y.Name));
             var sb = new StringBuilder();
             var counter = 0;
             var totalValue = 0;
@@ -105,12 +105,6 @@ namespace Expeditions
             sb.AppendLine($"Total Value: {totalValue / 100.0}₣");
             return sb.ToString();
         }
-
-        int Compare(Item a, Item b)
-        {
-            return a.Name.CompareTo(b.Name);
-        }
-
 
         private void Button_Save(object sender, RoutedEventArgs e)
         {
