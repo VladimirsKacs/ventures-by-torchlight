@@ -16,6 +16,7 @@ namespace Expeditions
     public partial class MainWindow : Window
     {
         List<Adventurer> _adventurers= new List<Adventurer>();
+        private bool _saveWarning = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +44,7 @@ namespace Expeditions
             var sb = new StringBuilder();
             sb.AppendLine("[spoiler=Adventurers]");
             var separator = string.Empty;
+            var expeditionLog = expedition.Go(_adventurers, (Location)DestinationBox.SelectedItem);
             foreach (var adv in _adventurers)
             {
                 sb.Append(separator);
@@ -52,11 +54,12 @@ namespace Expeditions
 
             sb.AppendLine("[/spoiler]");
             sb.AppendLine("[spoiler=Log]");
-            sb.Append(expedition.Go(_adventurers, (Location)DestinationBox.SelectedItem));
+            sb.Append(expeditionLog);
             sb.AppendLine("[/spoiler]");
             sb.AppendLine(PrintLoot(expedition.Loot));
             var log = new Log(sb.ToString());
             log.Show();
+            _saveWarning = true;
         }
 
         string PrintLoot(List<Item> loot)
@@ -120,12 +123,22 @@ namespace Expeditions
                 });
                 File.WriteAllText(fileName, advStr);
             }
+
+            _saveWarning = false;
         }
 
         private void Button_Clear(object sender, RoutedEventArgs e)
         {
-            Tabs.Items.Clear();
-            _adventurers.Clear();
+            if (_saveWarning)
+            {
+                MessageBox.Show("You did not save!");
+                _saveWarning = false;
+            }
+            else
+            {
+                Tabs.Items.Clear();
+                _adventurers.Clear();
+            }
         }
     }
 }
