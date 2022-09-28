@@ -149,6 +149,7 @@ namespace Expeditions
                         var ammo = adventurer.Items.OfType<SpareAmmo>().FirstOrDefault();
                         if (ranged.Ammo == 0 && ammo != null)
                         {
+                            _log.AppendLine($"{adventurer.Name} unpacks his spare ammo.");
                             ranged.Ammo = ranged.AmmoMax;
                             adventurer.Items.Remove(ammo);
                         }

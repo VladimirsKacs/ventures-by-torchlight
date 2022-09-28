@@ -38,6 +38,7 @@ namespace Expeditions
                         log.Append(Combat(adventurers, location));
                         break;
                 }
+                log.AppendLine();
             }
 
             foreach (var adventurer in adventurers)
