@@ -20,7 +20,7 @@
         <Label Content="Armor:" HorizontalAlignment="Left" Height="30" Margin="0,123,0,0" VerticalAlignment="Top" Width="83"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,127,0,0" TextWrapping="Wrap" Text="{Binding Armor}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
         <Label Content="XP:" HorizontalAlignment="Left" Height="30" Margin="149,123,0,0" VerticalAlignment="Top" Width="83"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="237,127,0,0" TextWrapping="Wrap" Text="{Binding Xp}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="237,127,0,0" TextWrapping="Wrap" Text="{Binding Xp}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
         <Label Content="HP:" HorizontalAlignment="Left" Height="30" Margin="0,151,0,0" VerticalAlignment="Top" Width="83"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,155,0,0" TextWrapping="Wrap" Text="{Binding Hp}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
         <Label Content="out of" HorizontalAlignment="Left" Margin="123,153,0,0" VerticalAlignment="Top"/>
@@ -29,7 +29,7 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,183,0,0" TextWrapping="Wrap" Text="{Binding Encumbrance}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
         <Label Content="out of" HorizontalAlignment="Left" Margin="123,181,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="170,183,0,0" TextWrapping="Wrap" Text="{Binding CarryCapacity}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
-        <Label Content="Items:" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top"/>
+        <Label Content="Items:" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top"/>
         <ListBox HorizontalAlignment="Left" Height="121" Margin="10,294,0,0" VerticalAlignment="Top" Width="257" ItemsSource="{Binding Items, Mode=TwoWay}" Name="Items"/>
         <Button Content="Equip" HorizontalAlignment="Left" Margin="192,420,0,0" VerticalAlignment="Top" Width="75" Click="Equip_Click"/>
         <Button Content="Unequip" HorizontalAlignment="Left" Margin="112,420,0,0" VerticalAlignment="Top" Width="75" Click="Enequip_Click"/>
@@ -37,6 +37,9 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,214,0,0" TextWrapping="Wrap" Text="{Binding IdealRange}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
         <Label Content="Range:" HorizontalAlignment="Left" Height="30" Margin="149,209,0,0" VerticalAlignment="Top" Width="83"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="192,214,0,0" TextWrapping="Wrap" Text="{Binding FiringRange}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
+        <Button Content="Use" HorizontalAlignment="Left" Margin="37,420,0,0" VerticalAlignment="Top" Width="70" Click="Use_Click"/>
+        <Label Content="HP Threshold:" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="83" Margin="0,239,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="88,243,0,0" TextWrapping="Wrap" Text="{Binding HpThreshold}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
 
     </Grid>
 </UserControl>

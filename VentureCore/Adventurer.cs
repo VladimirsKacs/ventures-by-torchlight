@@ -29,6 +29,8 @@ namespace VentureCore
 
         public int IdealRange { get; set; }
 
+        public int HpThreshold { get; set; }
+
         public string Print(int bid = 0)
         {
             var sb = new StringBuilder();

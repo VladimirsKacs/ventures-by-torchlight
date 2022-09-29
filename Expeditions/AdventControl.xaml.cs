@@ -40,8 +40,14 @@ namespace Expeditions
 
         private void Enequip_Click(object sender, RoutedEventArgs e)
         {
-            if (Items.SelectedItem != null)
-                (Items.SelectedItem as Item).Unequip(Adventurer);
+            var item = Items.SelectedItem as Item;
+            item?.Unequip(Adventurer);
+        }
+
+        private void Use_Click(object sender, RoutedEventArgs e)
+        {
+            var item = Items.SelectedItem as Consumable;
+            item?.Use(Adventurer);
         }
     }
 }

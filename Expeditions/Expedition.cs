@@ -39,6 +39,11 @@ namespace Expeditions
                         break;
                 }
                 log.AppendLine();
+                if (adventurers.Any(x => x.Hp <= x.HpThreshold))
+                {
+                    log.AppendLine("The party stops for the day to mend their wounds.");
+                    break;
+                }
             }
 
             foreach (var adventurer in adventurers)

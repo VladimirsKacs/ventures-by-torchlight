@@ -58,7 +58,7 @@ namespace Expeditions
         void StepA(int advIndex)
         {
             var adventurer = _adventurers[advIndex];
-            if (adventurer.Hp < 0)
+            if (_enemies.Count == 0)
                 return;
             var closestE = _enPositions.OrderBy(x => x).FirstOrDefault();
             var enIndex = _enPositions.IndexOf(closestE); //TODO: better targeting
@@ -186,9 +186,9 @@ namespace Expeditions
         void StepE(int eIndex)
         {
             var enemy = _enemies[eIndex];
-            if (enemy.Hp < 0)
+            if (_adventurers.Count == 0)
                 return;
-            var closestA = _advPositions.OrderBy(x => x).FirstOrDefault();
+            var closestA = _advPositions.OrderBy(x => x).LastOrDefault();
             var advIndex = _advPositions.IndexOf(closestA); //TODO: better targeting
             var adv = _adventurers[advIndex];
             if (_enPositions[eIndex] == closestA)
