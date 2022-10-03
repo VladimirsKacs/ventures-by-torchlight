@@ -2,7 +2,7 @@
 {
     public class Blunderbus : Ranged
     {
-        public override int RangeIncrement => 10;
+        public override int RangeIncrement => 5;
 
         public override int AmmoMax => 5;
 
@@ -12,7 +12,7 @@
 
         public override int Add => 1;
 
-        public override int AttributeCorrection => 0;
+        public override int AttributeCorrection => 2;
 
         public override Piercing Piercing => Piercing.Double;
 

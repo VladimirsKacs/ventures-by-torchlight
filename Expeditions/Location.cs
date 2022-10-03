@@ -2,10 +2,14 @@
 {
     public enum Location
     {
-        Overgrown_1,
-        Overgrown_2,
-        Overgrown_3,
-        Overgrown_4,
-        Overgrown_Boss
+        Overgrown1,
+        Overgrown2,
+        Overgrown3,
+        Overgrown4,
+        OvergrownBoss,
+        Arena1,
+        Arena2,
+        Arena3,
+        Arena4,
     }
 }

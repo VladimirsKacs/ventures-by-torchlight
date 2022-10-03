@@ -13,9 +13,9 @@ namespace CharGen
     {
         static void Main(string[] args)
         {
-            //var adv = CharGen();
-            //Console.WriteLine(adv.Print());
-            //Save(adv);
+            var adv = CharGen();
+            Console.WriteLine(adv.Print(300));
+            Save(adv);
             PrintStore();
             Console.ReadKey();
         }
@@ -35,8 +35,10 @@ namespace CharGen
 
         static void PrintStore()
         {
-            Console.WriteLine(new Rapier().Print(1));
-            Console.WriteLine(new MicroHealthPotion().Print(2));
+            Console.WriteLine(new Stick().Print(1));
+            Console.WriteLine(new Crossbow().Print(1));
+            Console.WriteLine(new LockPick().Print(1));
+            Console.WriteLine(new Crowbar().Print(1));
         }
 
         static Adventurer CharGen()
@@ -71,8 +73,8 @@ namespace CharGen
                 return 2;
         }
 
-        static readonly List<string> honorific = new List<string> { "Mr.", "Ms.", "Dr.", "Pvt."};
-        static readonly List<string> firstNames = new List<string> { "Ally", "Aschleigh","Beto","Carbon","Delany","Effoy", "Fitz",
+        static readonly List<string> Honorific = new List<string> { "Mr.", "Ms.", "Dr.", "Pvt."};
+        static readonly List<string> FirstNames = new List<string> { "Ally", "Aschleigh","Beto","Carbon","Delany","Effoy", "Fitz",
         "Georg", "Heiger" , "Inns", "Jocel", "Kathode", "Llamas", "Manos", "Oper", "Percy", "Quimby", "Rostish", "Statos", "Tallhearth",
         "Vivi", "West", "Yvonne", "Zachar"};
         static readonly List<string> LastNames = new List<string> { "Aral", "Bean", "Cage", "Deft", "Envin", "Frakes", "Golen",
@@ -82,7 +84,7 @@ namespace CharGen
         static string NameGen()
         {
             var random = new Random();
-            return honorific[random.Next(honorific.Count)] + " " + firstNames[random.Next(firstNames.Count)] + " " + LastNames[random.Next(LastNames.Count)];
+            return Honorific[random.Next(Honorific.Count)] + " " + FirstNames[random.Next(FirstNames.Count)] + " " + LastNames[random.Next(LastNames.Count)];
         }
     }
 }

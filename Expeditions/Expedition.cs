@@ -18,14 +18,19 @@ namespace Expeditions
         public string Go(List<Adventurer> adventurers, Location location)
         {
             StringBuilder log = new StringBuilder();
-            if (location == Location.Overgrown_Boss)
+            if (location == Location.OvergrownBoss)
             {
                 return Combat(adventurers, location);
             }
 
             for (var i = 0; i < _random.Next(4,8); i++)
             {
-                switch (_random.Next(4))
+                if (adventurers.Any(x => x.Hp <= x.HpThreshold))
+                {
+                    log.AppendLine("The party stops for the day to mend their wounds.");
+                    break;
+                }
+                switch (_random.Next(5))
                 {
                     case 0:
                     case 1:
@@ -37,13 +42,11 @@ namespace Expeditions
                     case 3:
                         log.Append(Combat(adventurers, location));
                         break;
+                    case 4:
+                        log.Append(Trap(adventurers, location));
+                        break;
                 }
                 log.AppendLine();
-                if (adventurers.Any(x => x.Hp <= x.HpThreshold))
-                {
-                    log.AppendLine("The party stops for the day to mend their wounds.");
-                    break;
-                }
             }
 
             foreach (var adventurer in adventurers)
@@ -62,8 +65,8 @@ namespace Expeditions
             List<LootTable> loots= new List<LootTable>();
             switch (location)
             {
-                case Location.Overgrown_1:
-                case Location.Overgrown_2:
+                case Location.Overgrown1:
+                case Location.Overgrown2:
                     switch (_random.Next(7))
                     {
                         case 0:
@@ -88,8 +91,8 @@ namespace Expeditions
                             break;
                     }
                     break;
-                case Location.Overgrown_3:
-                case Location.Overgrown_4:
+                case Location.Overgrown3:
+                case Location.Overgrown4:
                     switch (_random.Next(7))
                     {
                         case 0:
@@ -118,13 +121,13 @@ namespace Expeditions
                             break;
                     }
                     break;
-                case Location.Overgrown_Boss:
+                case Location.OvergrownBoss:
                     combat = new Combat(adventurers, new List<Enemy> { new Wolf(_random) }, _random.Next(75, 125), _random);
                     loots.Add(new Wolf((_random)).LootTable);
-                    sb.AppendLine("a large wolf");
+                    sb.AppendLine("a large wolf's lair");
                     break;
                 default:
-                    return String.Empty;
+                    return "!ERROR!";
             }
             var result = combat.Fight();
             if (result == FightResult.Win)
@@ -150,19 +153,18 @@ namespace Expeditions
                 Loot.AddRange(loot);
                 return sb.ToString();
             }
-            else if(result == FightResult.Draw)
+
+            if(result == FightResult.Draw)
             {
                 sb.Append(combat.Log);
                 sb.AppendLine("Exhausted by the fight, you leave each other alone.");
                 return sb.ToString();
             }
-            else
-            {
-                sb.Append(combat.Log);
-                sb.AppendLine("YOU DIED.");
-                return sb.ToString();
-            }
-            
+
+            sb.Append(combat.Log);
+            sb.AppendLine("YOU DIED.");
+            return sb.ToString();
+
         }
 
 
@@ -172,8 +174,8 @@ namespace Expeditions
             LootTable lootTable = null;
             switch (location)
             {
-                case Location.Overgrown_1:
-                case Location.Overgrown_2:
+                case Location.Overgrown1:
+                case Location.Overgrown2:
                     lootTable = new LootTable( new Dictionary<Item, int>
                     {
                         {new Nail(), 40},
@@ -186,8 +188,8 @@ namespace Expeditions
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
-                case Location.Overgrown_3:
-                case Location.Overgrown_4:
+                case Location.Overgrown3:
+                case Location.Overgrown4:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 20},
@@ -224,7 +226,7 @@ namespace Expeditions
             LootTable lootTable = null;
             switch (location)
             {
-                case Location.Overgrown_1:
+                case Location.Overgrown1:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 5},
@@ -236,7 +238,7 @@ namespace Expeditions
                     }, _random);
                     sb.AppendLine("You find a chest...");
                     break;
-                case Location.Overgrown_2:
+                case Location.Overgrown2:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 1},
@@ -248,7 +250,7 @@ namespace Expeditions
                     }, _random);
                     sb.AppendLine("You find a chest...");
                     break;
-                case Location.Overgrown_3:
+                case Location.Overgrown3:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new SandPaper(), 5},
@@ -260,7 +262,7 @@ namespace Expeditions
                     }, _random);
                     sb.AppendLine("You find a chest...");
                     break;
-                case Location.Overgrown_4:
+                case Location.Overgrown4:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Groshen(), 5 },
@@ -269,11 +271,17 @@ namespace Expeditions
                     }, _random);
                     sb.AppendLine("You find a chest...");
                     break;
+                default:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Nothing(), 1 }
+                    }, _random);
+                    sb.AppendLine("You have encountered an !ERROR!");
+                    break;
             }
 
-            Random random = new Random();
-            var pickDifficulty = random.Next(20);
-            var breakDifficulty = random.Next(20);
+            var pickDifficulty = _random.Next(20);
+            var breakDifficulty = _random.Next(20);
             var lootMultiplier = (pickDifficulty + breakDifficulty) / 5;
 
             var picker = adventurers.Where(a => a.Items.OfType<LockPick>().Any()).OrderBy(a => a.Dexterity).LastOrDefault();
@@ -326,11 +334,39 @@ namespace Expeditions
                 Loot.AddRange(loot);
                 return sb.ToString();
             }
-            else
+
+            sb.AppendLine("You leave empty handed.");
+            return sb.ToString();
+        }
+
+        string Trap(List<Adventurer> adventurers, Location location)
+        {
+            var sb = new StringBuilder();
+            var victim = adventurers[_random.Next(adventurers.Count)];
+            switch (location)
             {
-                sb.AppendLine("You leave empty handed.");
-                return sb.ToString();
+                case Location.Overgrown1:
+                case Location.Overgrown2:
+                case Location.Overgrown3:
+                case Location.Overgrown4:
+                    sb.AppendLine("There is a dry twig on the ground");
+                    if (_random.Next(20) < victim.Agility)
+                    {
+                        sb.Append($"{victim.Name} nimbly evades it");
+                        if (adventurers.Count > 1)
+                            sb.Append(" and points it out to the rest of the party");
+                        sb.AppendLine(".");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"{victim.Name} steps on it like a chump, alerting all the animals to your presence.");
+                        sb.AppendLine($"The only damage is to their pride, however.");
+                    }
+                    break;
+
             }
+
+            return sb.ToString();
         }
     }
 }

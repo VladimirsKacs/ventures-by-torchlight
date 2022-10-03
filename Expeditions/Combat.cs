@@ -268,11 +268,11 @@ namespace Expeditions
                 _log.AppendLine(enemy.Name + " dies.");
                 _enemies.Remove(enemy);
                 _enPositions.RemoveAt(eIndex);
-                AwardXP(enemy);
+                AwardXp(enemy);
             }
         }
 
-        void AwardXP(Enemy enemy)
+        void AwardXp(Enemy enemy)
         {
             var xp = enemy.Xp / _adventurers.Count;
             foreach (var adv in _adventurers)
