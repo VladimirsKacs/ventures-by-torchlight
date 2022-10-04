@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Expeditions;
 
 namespace VentureCore
 {
@@ -30,6 +31,8 @@ namespace VentureCore
         public int IdealRange { get; set; }
 
         public int HpThreshold { get; set; }
+
+        public Row Row { get; set; }
 
         public string Print(int bid = 0)
         {

@@ -40,6 +40,7 @@
         <Button Content="Use" HorizontalAlignment="Left" Margin="37,420,0,0" VerticalAlignment="Top" Width="70" Click="Use_Click"/>
         <Label Content="HP Threshold:" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="83" Margin="0,239,0,0"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,243,0,0" TextWrapping="Wrap" Text="{Binding HpThreshold}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
+        <ComboBox HorizontalAlignment="Left" Margin="138,244,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Row}" Name="RowBox"/>
 
     </Grid>
 </UserControl>

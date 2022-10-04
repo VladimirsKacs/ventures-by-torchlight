@@ -26,6 +26,7 @@ namespace Expeditions
             Adventurer = adventurer;
             PathToFile = path;
             InitializeComponent();
+            RowBox.ItemsSource = Enum.GetValues(typeof(Row));
         }
 
         private void Equip_Click(object sender, RoutedEventArgs e)

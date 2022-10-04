@@ -33,7 +33,7 @@ namespace VentureCore
                 sb.AppendLine($"[td][b]Stock:[/b][/td][td]{count}[/td][/tr]");
             }
             sb.AppendLine($"[tr][td][/td][td][/td][td][b][u]Name:[/u][/b][/td][td]{Name}[/td][/tr]");
-            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Weight:[/b][/td][td]{Weight})[/td][td]  |  [/td][td][b]Charges:[/b][/td][td]{ChargesMax}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Weight:[/b][/td][td]{Weight}[/td][td]  |  [/td][td][b]Charges:[/b][/td][td]{ChargesMax}[/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Value:[/b][/td][td]{Value}[/td][td]  |  [/td][td][b]Consumable:[/b][/td][td]Yes[/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Description:[/b][/td][td]{Description}[/td][td][/tr]");
             sb.AppendLine("[/table]");
