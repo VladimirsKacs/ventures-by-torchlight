@@ -9,14 +9,14 @@ namespace VentureCore
         public int Charges { get; set; }
         public abstract int ChargesMax { get;}
 
-        public void Use(Adventurer adventurer)
+        public virtual void Use(Adventurer adventurer)
         {
             Charges--;
-            if (Charges == 0)
+            if (Charges <= 0)
                 Unequip(adventurer);
         }
 
-        public new void Equip(Adventurer adventurer)
+        public override void Equip(Adventurer adventurer)
         {
             base.Equip(adventurer);
             Charges = ChargesMax;

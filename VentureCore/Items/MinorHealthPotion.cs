@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace VentureCore.Items
 {
@@ -16,7 +14,7 @@ namespace VentureCore.Items
 
         public override int Value => 75;
 
-        public new void Use(Adventurer adventurer)
+        public override void Use(Adventurer adventurer)
         {
             base.Use(adventurer);
             var random = new Random();

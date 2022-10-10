@@ -18,7 +18,7 @@ namespace Expeditions
         public string Go(List<Adventurer> adventurers, Location location)
         {
             StringBuilder log = new StringBuilder();
-            if (location == Location.OvergrownBoss)
+            if (location >= Location.Boss)
             {
                 return Combat(adventurers, location);
             }
@@ -123,8 +123,32 @@ namespace Expeditions
                     break;
                 case Location.OvergrownBoss:
                     combat = new Combat(adventurers, new List<Enemy> { new Wolf(_random) }, _random.Next(75, 125), _random);
-                    loots.Add(new Wolf((_random)).LootTable);
+                    loots.Add(new Wolf(_random).LootTable);
+                    loots.Add(new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Nail(), 5},
+                        {new SandPaper(), 5},
+                        {new Pfennig(), 10 },
+                        {new Groshen(), 6 },
+                        {new Florin(), 2 },
+                        {new ArenaTicket(), 1 },
+                        {new Again(), 15 }
+                    }, _random));
+                    loots.Add(new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Nail(), 5},
+                        {new SandPaper(), 5},
+                        {new Pfennig(), 10 },
+                        {new Groshen(), 6 },
+                        {new Florin(), 2 },
+                        {new ArenaTicket(), 1 },
+                        {new Again(), 15 }
+                    }, _random));
                     sb.AppendLine("a large wolf's lair");
+                    break;
+
+                case Location.Arena1:
+                    combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) }, _random.Next(75, 125), _random);
                     break;
                 default:
                     return "!ERROR!";

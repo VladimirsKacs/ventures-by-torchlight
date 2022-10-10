@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VentureCore.Items
+﻿namespace VentureCore.Items
 {
     public class MicroHealthPotion : Consumable
     {
@@ -14,7 +10,7 @@ namespace VentureCore.Items
 
         public override int Value => 30;
 
-        public new void Use(Adventurer adventurer)
+        public override void Use(Adventurer adventurer)
         {
             base.Use(adventurer);
             if (adventurer.Hp < adventurer.HpMax)
