@@ -74,10 +74,13 @@ namespace CharGen
         static readonly List<string> Honorific = new List<string> { "Mr.", "Ms.", "Dr.", "Pvt."};
         static readonly List<string> FirstNames = new List<string> { "Ally", "Aschleigh","Beto","Carbon","Delany","Effoy", "Fitz",
         "Georg", "Heiger" , "Inns", "Jocel", "Kathode", "Llamas", "Manos", "Oper", "Percy", "Quimby", "Rostish", "Statos", "Tallhearth",
-        "Vivi", "West", "Yvonne", "Zachar"};
+        "Vivi", "West", "Yvonne", "Zachar", "Agnie", "Berth", "Ched", "Darth", "Essa", "Frud", "Gumbo", "Hollie", "Isken", "Jalin","Katniss",
+        "Loizh", "Mursy", "Olybeth", "Pawn", "Rotmund", "Serge", "Trilby", "Ugnan", "Veresk", "Wass", "Yalda", "Siegjarl"};
         static readonly List<string> LastNames = new List<string> { "Aral", "Bean", "Cage", "Deft", "Envin", "Frakes", "Golen",
         "Hyun", "Iverson", "Jackson", "Kath", "Leguin", "Minster", "O'Mann", "Price", "Questor", "Reiff", "St.Quinn",
-        "Teviegh", "Vronsky", "West", "Xanadu"};
+        "Teviegh", "Vronsky", "West", "Xanadu", "Zapata", "Azer", "Bizzt", "Cerg", "Dreary", "Esthman", "Firm", "Grimm", "Heiger",
+        "Iskra", "Jay", "Kell", "L'Etarto","Magimann","Orkin", "Pigmen", "Roald", "Severus", "Trata", "Urist", "Vexler", "Worclaw", "Xander",
+        "Yersika", "Zeit" };
 
         static string NameGen()
         {
