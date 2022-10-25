@@ -28,7 +28,12 @@ namespace Expeditions
             _advPositions= new List<int>();
             _enPositions= new List<int>();
             foreach (var adv in adventurers)
+            {
                 _advPositions.Add(0);
+                if (adv.Ranged != null)
+                    adv.Ranged.ReloadCooldown = 0;
+            }
+
             foreach (var enemy in enemies)
                 _enPositions.Add(distance);
             _random = random ?? new Random();

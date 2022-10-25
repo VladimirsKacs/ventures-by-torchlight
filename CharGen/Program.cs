@@ -35,8 +35,7 @@ namespace CharGen
 
         static void PrintStore()
         {
-            Console.WriteLine(new Backpack().Print(1));
-            Console.WriteLine(new Longbow().Print(1));
+            Console.WriteLine(new HealthPotion().Print(1));
         }
 
         static Adventurer CharGen()
