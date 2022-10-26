@@ -157,7 +157,7 @@ namespace Expeditions
                         {
                             _log.AppendLine($"{adventurer.Name} unpacks his spare ammo.");
                             ranged.Ammo = ranged.AmmoMax;
-                            adventurer.Items.Remove(ammo);
+                            ammo.Unequip(adventurer);
                         }
                     }
                 }
