@@ -89,12 +89,12 @@ namespace Expeditions
                 }
 
                 var adjustedStrength = adventurer.Strength + melee.AttributeCorrection;
-                if (roll < adjustedStrength && roll >= adjustedArmor)
+                if (roll < adjustedStrength - adjustedArmor)
                 {
                     var damage = melee.Add;
                     for (var i = 0; i < melee.Dice; i++)
                         damage += _random.Next(melee.Sides) + 1;
-                    _log.AppendLine(" and hits for "+damage+" damage.");
+                    _log.AppendLine(" and hits for " + damage + " damage.");
                     enemy.Hp -= damage;
                     CheckDead(enemy, enIndex);
                 }

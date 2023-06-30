@@ -39,7 +39,7 @@ namespace Expeditions
         Adventurer Adventurer { get; }
         public string PathToFile { get; }
 
-        private void Enequip_Click(object sender, RoutedEventArgs e)
+        private void Unequip_Click(object sender, RoutedEventArgs e)
         {
             var item = Items.SelectedItem as Item;
             item?.Unequip(Adventurer);

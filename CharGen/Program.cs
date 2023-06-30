@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using VentureCore;
 using Newtonsoft.Json;
@@ -41,20 +42,21 @@ namespace CharGen
         static Adventurer CharGen()
         {
             var random = new Random();
-            var adventurer = new Adventurer();
-            adventurer.Agility = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
-            adventurer.Constitution = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
-            adventurer.Dexterity = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
-            adventurer.Strength = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
-            adventurer.Hp = adventurer.HpMax = random.Next(1, 7)+ConstCorrection(adventurer);
-            adventurer.Level = 1;
-            adventurer.Xp = 0;
-            adventurer.CarryCapacity = random.Next(3, 10);
-            adventurer.Servitude = random.Next(10, 40);
-            adventurer.Armor = 0;
-            adventurer.Encumbrance = 0;
-            adventurer.Items = new List<Item>();
-            adventurer.Name = NameGen();
+            var adventurer = new Adventurer
+            {
+                Agility = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7),
+                Constitution = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7),
+                Dexterity = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7),
+                Strength = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7),
+                Level = 1,
+                Xp = 0,
+                CarryCapacity = random.Next(3, 10),
+                Armor = 0,
+                Encumbrance = 0,
+                Items = new ObservableCollection<Item>(),
+                Name = NameGen()
+            };
+            adventurer.Hp = adventurer.HpMax = random.Next(1, 7) + ConstCorrection(adventurer);
             return adventurer;
         }
 

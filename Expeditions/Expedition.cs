@@ -49,11 +49,6 @@ namespace Expeditions
                 log.AppendLine();
             }
 
-            foreach (var adventurer in adventurers)
-            {
-                adventurer.Servitude--;
-            }
-
             return log.ToString();
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Expeditions;
 
@@ -14,7 +15,6 @@ namespace VentureCore
         public int HpMax { get; set; }
         public int Agility { get; set; }
         public int CarryCapacity { get; set; }
-        public int Servitude { get; set; }
         public int Armor { get; set; }
         public int Xp { get; set; }
         public int Level { get; set; }
@@ -24,7 +24,7 @@ namespace VentureCore
         public Melee Melee { get; set; }
         public Ranged Ranged { get; set; }
 
-        public List<Item> Items { get; set; }
+        public ObservableCollection<Item> Items { get; set; }
 
         public int FiringRange { get; set; }
 
@@ -45,7 +45,7 @@ namespace VentureCore
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Strength:[/b][/td][td]{Strength}[/td][td]  |  [/td][td][b]Dexterity:[/b][/td][td]{Dexterity}[/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Constitution:[/b][/td][td]{Constitution}[/td][td]  |  [/td][td][b]Agility:[/b][/td][td]{Agility}[/td][/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Level:[/b][/td][td]{Level}[/td][td]  |  [/td][td][b]XP:[/b][/td][td]{Xp}[/td][/tr]");
-            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Carry Capacity:[/b][/td][td]{CarryCapacity}[/td][td]  |  [/td][td][b]Service Length:[/b][/td][td]{Servitude}[/td][/tr]");
+            sb.AppendLine($"[tr][td][/td][td][/td][td][b]Carry Capacity:[/b][/td][td]{CarryCapacity}[/td][td]  | [/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Melee:[/b][/td][td]{Melee?.Name ?? "Fists"}[/td][td]" +
                           $"  |  [/td][td][b]Ranged (ammo):[/b][/td][td]{Ranged?.Name ?? "N/A"} ({Ranged?.Ammo.ToString() ?? "N/A"})[/td][/tr]");
             sb.AppendLine("[/table]");

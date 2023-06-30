@@ -32,7 +32,7 @@
         <Label Content="Items:" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top"/>
         <ListBox HorizontalAlignment="Left" Height="121" Margin="10,294,0,0" VerticalAlignment="Top" Width="257" ItemsSource="{Binding Items, Mode=TwoWay}" Name="Items"/>
         <Button Content="Equip" HorizontalAlignment="Left" Margin="192,420,0,0" VerticalAlignment="Top" Width="75" Click="Equip_Click"/>
-        <Button Content="Unequip" HorizontalAlignment="Left" Margin="112,420,0,0" VerticalAlignment="Top" Width="75" Click="Enequip_Click"/>
+        <Button Content="Unequip" HorizontalAlignment="Left" Margin="112,420,0,0" VerticalAlignment="Top" Width="75" Click="Unequip_Click"/>
         <Label Content="Ideal Range:" HorizontalAlignment="Left" Height="30" Margin="0,209,0,0" VerticalAlignment="Top" Width="83"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="88,214,0,0" TextWrapping="Wrap" Text="{Binding IdealRange}" VerticalAlignment="Top" Width="30" IsEnabled="True"/>
         <Label Content="Range:" HorizontalAlignment="Left" Height="30" Margin="149,209,0,0" VerticalAlignment="Top" Width="83"/>
