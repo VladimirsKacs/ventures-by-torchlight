@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
-using VentureCore;
 using Newtonsoft.Json;
-using System.Text;
+using VentureCore;
 
 namespace Expeditions
 {
@@ -16,7 +15,7 @@ namespace Expeditions
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Adventurer> _adventurers= new List<Adventurer>();
+        readonly List<Adventurer> _adventurers= new List<Adventurer>();
         private bool _saveWarning = false;
         private List<Item> _loot = new List<Item>();
 
