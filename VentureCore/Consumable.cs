@@ -28,7 +28,6 @@ namespace VentureCore
             sb.AppendLine("[table]");
             if (count > 0)
             {
-                var rand = new Random();
                 sb.AppendLine($"[tr][td][b]Price:[/b][/td][td]{rand.Next(Value, Value * 2) / 100.0}F[/td][/tr]");
                 sb.AppendLine($"[td][b]Stock:[/b][/td][td]{count}[/td][/tr]");
             }

@@ -6,6 +6,7 @@ namespace VentureCore
 {
     public abstract class Item
     {
+        protected static Random rand = new Random();
         public abstract int Weight { get;}
         public abstract int Value { get;}
 
@@ -17,14 +18,12 @@ namespace VentureCore
             if (adventurer.Encumbrance + Weight > adventurer.CarryCapacity)
                 throw new Exception("too heavy");
             adventurer.Items.Add(this);
-            adventurer.Encumbrance += Weight;
         }
         public virtual void Unequip(Adventurer adventurer)
         {
             if (!adventurer.Items.Contains(this))
                 throw new Exception("not equipped");
             adventurer.Items.Remove(this);
-            adventurer.Encumbrance -= Weight;
         }
 
         public new string ToString()
@@ -35,7 +34,6 @@ namespace VentureCore
         public virtual string Print(int count = 0)
         {
             var sb = new StringBuilder();
-            Random rand= new Random();
             sb.AppendLine("[table]");
             if(count > 0)
             {

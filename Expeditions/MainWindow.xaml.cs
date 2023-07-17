@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
@@ -132,6 +133,46 @@ namespace Expeditions
             {
                 Tabs.Items.Clear();
                 _adventurers.Clear();
+            }
+        }
+
+        private void Button_SaveExpedition(object sender, RoutedEventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == true)
+            {
+                var expedition = new Roster
+                {
+                    Adventurers = _adventurers,
+                    Location = (Location)DestinationBox.SelectedValue
+                };
+                var json = JsonConvert.SerializeObject(expedition, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+                File.WriteAllText(sfd.FileName, json);
+                Button_Save(sender, e);
+                Button_Clear(sender, e);
+            }
+        }
+
+        private void Button_LoadExpedition(object sender, RoutedEventArgs e)
+        {
+            Button_Clear(sender, e);
+            var ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                var expJson = File.ReadAllText(ofd.FileName);
+                var expedition = JsonConvert.DeserializeObject<Roster>(expJson, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+                DestinationBox.SelectedValue = expedition.Location + 1;
+                foreach (var adventurer in expedition.Adventurers)
+                {
+                    Tabs.Items.Add(new TabItem { Content = new AdventControl(adventurer, adventurer.Name+".adv") { DataContext = adventurer }, Header = adventurer.Name });
+                    _adventurers.Add(adventurer);
+                }
             }
         }
     }

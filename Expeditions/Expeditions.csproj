@@ -61,6 +61,7 @@
     <Compile Include="Log.xaml.cs">
       <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Roster.cs" />
     <Page Include="AdventControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

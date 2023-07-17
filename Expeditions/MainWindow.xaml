@@ -14,5 +14,7 @@
         <Button Content="Save Adventurers" HorizontalAlignment="Left" Margin="653,466,0,0" VerticalAlignment="Top" Width="106" Click="Button_Save"/>
         <ComboBox HorizontalAlignment="Left" Margin="525,466,0,0" VerticalAlignment="Top" Width="120" Name="DestinationBox"/>
         <Button Content="Clear Adventurers" HorizontalAlignment="Left" Margin="653,443,0,0" VerticalAlignment="Top" Width="106" Click="Button_Clear"/>
+        <Button Content="Save Expedition" HorizontalAlignment="Left" Margin="400,492,0,0" VerticalAlignment="Top" Click="Button_SaveExpedition"/>
+        <Button Content="Load Expedition" HorizontalAlignment="Left" Margin="400,466,0,0" VerticalAlignment="Top" Click="Button_LoadExpedition"/>
     </Grid>
 </Window>

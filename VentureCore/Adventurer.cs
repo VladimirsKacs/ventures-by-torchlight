@@ -19,7 +19,19 @@ namespace VentureCore
         public int Xp { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
-        public int Encumbrance { get; set; }
+
+        public int Encumbrance
+        {
+            get
+            {
+                var sum = 0;
+                foreach (var item in Items)
+                {
+                    sum += item.Weight;
+                }
+                return sum;
+            }
+        }
 
         public Melee Melee { get; set; }
         public Ranged Ranged { get; set; }

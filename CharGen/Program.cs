@@ -52,7 +52,6 @@ namespace CharGen
                 Xp = 0,
                 CarryCapacity = random.Next(3, 10),
                 Armor = 0,
-                Encumbrance = 0,
                 Items = new ObservableCollection<Item>(),
                 Name = NameGen()
             };

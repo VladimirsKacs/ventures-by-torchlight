@@ -26,7 +26,7 @@
         <Label Content="out of" HorizontalAlignment="Left" Margin="123,153,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="170,155,0,0" TextWrapping="Wrap" Text="{Binding HpMax}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
         <Label Content="Encumbrnace:" HorizontalAlignment="Left" Height="30" Margin="0,179,0,0" VerticalAlignment="Top" Width="83"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="88,183,0,0" TextWrapping="Wrap" Text="{Binding Encumbrance}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="88,183,0,0" TextWrapping="Wrap" Text="{Binding Encumbrance, Mode=OneWay}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
         <Label Content="out of" HorizontalAlignment="Left" Margin="123,181,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="170,183,0,0" TextWrapping="Wrap" Text="{Binding CarryCapacity}" VerticalAlignment="Top" Width="30" IsEnabled="False"/>
         <Label Content="Items:" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top"/>
