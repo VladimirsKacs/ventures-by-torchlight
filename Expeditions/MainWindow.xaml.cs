@@ -18,6 +18,8 @@ namespace Expeditions
     {
         List<Adventurer> _adventurers= new List<Adventurer>();
         private bool _saveWarning = false;
+        private List<Item> _loot = new List<Item>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -58,12 +60,14 @@ namespace Expeditions
             sb.Append(expeditionLog);
             sb.AppendLine("[/spoiler]");
             sb.AppendLine(PrintLoot(expedition.Loot));
+            _loot.AddRange(expedition.Loot);
+            sb.AppendLine(PrintLoot(_loot, true));
             var log = new Log(sb.ToString());
             log.Show();
             _saveWarning = true;
         }
 
-        string PrintLoot(List<Item> loot)
+        string PrintLoot(List<Item> loot, bool total = false)
         {
             if (loot.Count == 0)
                 return "No Loot";
@@ -73,7 +77,7 @@ namespace Expeditions
             var totalValue = 0;
             Item previous=loot[0];
             var type = previous.Name;
-            sb.AppendLine("[spoiler=Loot]");
+            sb.AppendLine(total ? "[spoiler=Total Expedition Loot]" : "[spoiler=Loot]");
             foreach (var l in loot)
             {
                 if (type == l.Name)
@@ -144,7 +148,8 @@ namespace Expeditions
                 var expedition = new Roster
                 {
                     Adventurers = _adventurers,
-                    Location = (Location)DestinationBox.SelectedValue
+                    Location = (Location)DestinationBox.SelectedValue,
+                    Loot = _loot
                 };
                 var json = JsonConvert.SerializeObject(expedition, new JsonSerializerSettings
                 {
@@ -173,6 +178,8 @@ namespace Expeditions
                     Tabs.Items.Add(new TabItem { Content = new AdventControl(adventurer, adventurer.Name+".adv") { DataContext = adventurer }, Header = adventurer.Name });
                     _adventurers.Add(adventurer);
                 }
+
+                _loot = expedition.Loot;
             }
         }
     }

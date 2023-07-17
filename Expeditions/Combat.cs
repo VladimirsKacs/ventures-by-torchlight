@@ -69,6 +69,44 @@ namespace Expeditions
             var closestE = _enPositions.OrderBy(x => x).FirstOrDefault();
             var enIndex = _enPositions.IndexOf(closestE); //TODO: better targeting
             var enemy = _enemies[enIndex];
+
+            var movement = _random.Next(adventurer.Agility) + 1;
+            var range = closestE - _advPositions[advIndex];
+            if ((adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
+                || (range< (movement + 1) / 2))
+                movement = (movement + 1) / 2;
+
+            var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First);
+            if ((guardian != null) && (adventurer.Row == Row.Last) && (range > adventurer.IdealRange))
+            {
+                var gIndex = _adventurers.IndexOf(guardian);
+                var gPosition = _advPositions[gIndex] - 1;
+                if (gPosition - movement < _advPositions[advIndex])
+                    movement = gPosition - _advPositions[advIndex];
+                _advPositions[advIndex] += movement;
+                _log.AppendLine($"{adventurer.Name} stays behind {guardian.Name}. They are now {_advPositions[gIndex] - _advPositions[advIndex]} feet apart.");
+            }
+            else
+            {
+                if (range > adventurer.IdealRange)
+                {
+                    if (range - movement <= adventurer.IdealRange)
+                        movement = range - adventurer.IdealRange;
+                    _advPositions[advIndex] += movement;
+                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name +
+                                    " (they are now " + (range - movement) + " feet apart.)");
+                }
+                else if (range < adventurer.IdealRange)
+                {
+                    if (range + movement >= adventurer.IdealRange)
+                        movement = adventurer.IdealRange - range;
+                    _advPositions[advIndex] -= movement;
+                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name +
+                                    " (they are now " + (range + movement) + " feet apart.)");
+                }
+            }
+
+
             if (_advPositions[advIndex] == closestE)
             {
                 var melee = adventurer.Melee ?? new Fists();
@@ -105,11 +143,8 @@ namespace Expeditions
             }
             else
             {
-                var movement = _random.Next(adventurer.Agility) + 1;
-                var range = closestE - _advPositions[advIndex];
                 if (adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
                 {
-                    movement = (movement + 1) / 2;
                     var ranged = adventurer.Ranged;
                     if (ranged.ReloadCooldown > 0)
                     {
@@ -164,36 +199,6 @@ namespace Expeditions
 
                 if (adventurer.Ranged == null || adventurer.Ranged.Ammo <= 0)
                     adventurer.IdealRange = 0;
-
-                var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First);
-                if ((guardian != null) && (adventurer.Row == Row.Last) && (range > adventurer.IdealRange))
-                {
-                        var gIndex = _adventurers.IndexOf(guardian);
-                        var gPosition = _advPositions[gIndex]-1;
-                        if (gPosition - movement < _advPositions[advIndex])
-                            movement = gPosition - _advPositions[advIndex];
-                        _advPositions[advIndex] += movement;
-                        _log.AppendLine($"{adventurer.Name} stays behind {guardian.Name}. They are now {_advPositions[gIndex] - _advPositions[advIndex]} feet apart.");
-                }
-                else
-                {
-                    if (range > adventurer.IdealRange)
-                    {
-                        if (range - movement <= adventurer.IdealRange)
-                            movement = range - adventurer.IdealRange;
-                        _advPositions[advIndex] += movement;
-                        _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name +
-                                        " (they are now " + (range - movement) + " feet apart.)");
-                    }
-                    else if (range < adventurer.IdealRange)
-                    {
-                        if (range + movement >= adventurer.IdealRange)
-                            movement = adventurer.IdealRange - range;
-                        _advPositions[advIndex] -= movement;
-                        _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name +
-                                        " (they are now " + (range + movement) + " feet apart.)");
-                    }
-                }
             }
         }
 

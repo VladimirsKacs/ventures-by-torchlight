@@ -11,5 +11,6 @@ namespace Expeditions
     {
         public List<Adventurer> Adventurers { get; set; }
         public Location Location { get; set; }
+        public List<Item> Loot { get; set; }
     }
 }
