@@ -26,5 +26,6 @@ namespace VentureCore
         public LootTable LootTable { get; set; }
         public string Name { get; set; }
         public int Armor { get; set; }
+        public int FiringRange { get; set; }
     }
 }

@@ -72,9 +72,13 @@ namespace Expeditions
 
             var movement = _random.Next(adventurer.Agility) + 1;
             var range = closestE - _advPositions[advIndex];
+            var attackable = false;
             if ((adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
-                || (range< (movement + 1) / 2))
+                || (range < (movement + 1) / 2))
+            {
                 movement = (movement + 1) / 2;
+                attackable = true;
+            }
 
             var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First);
             if ((guardian != null) && (adventurer.Row == Row.Last) && (range > adventurer.IdealRange))
@@ -106,100 +110,100 @@ namespace Expeditions
                 }
             }
 
-
-            if (_advPositions[advIndex] == closestE)
-            {
-                var melee = adventurer.Melee ?? new Fists();
-                _log.Append(adventurer.Name + " attacks " + enemy.Name + " with " + melee.Name);
-                var roll = _random.Next(20);
-                var adjustedArmor = enemy.Armor;
-                switch (melee.Piercing)
+            if(attackable)
+                if (_advPositions[advIndex] == closestE)
                 {
-                    case Piercing.Double:
-                        adjustedArmor = enemy.Armor * 2;
-                        break;
-                    case Piercing.Full:
-                        adjustedArmor = 0;
-                        break;
-                    case Piercing.Half:
-                        adjustedArmor = enemy.Armor / 2;
-                        break;
-                }
-
-                var adjustedStrength = adventurer.Strength + melee.AttributeCorrection;
-                if (roll < adjustedStrength - adjustedArmor)
-                {
-                    var damage = melee.Add;
-                    for (var i = 0; i < melee.Dice; i++)
-                        damage += _random.Next(melee.Sides) + 1;
-                    _log.AppendLine(" and hits for " + damage + " damage.");
-                    enemy.Hp -= damage;
-                    CheckDead(enemy, enIndex);
-                }
-                else
-                {
-                    _log.AppendLine(" but misses.");
-                }
-            }
-            else
-            {
-                if (adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
-                {
-                    var ranged = adventurer.Ranged;
-                    if (ranged.ReloadCooldown > 0)
+                    var melee = adventurer.Melee ?? new Fists();
+                    _log.Append(adventurer.Name + " attacks " + enemy.Name + " with " + melee.Name);
+                    var roll = _random.Next(20);
+                    var adjustedArmor = enemy.Armor;
+                    switch (melee.Piercing)
                     {
-                        ranged.ReloadCooldown--;
-                        _log.AppendLine(adventurer.Name + " reloads.");
+                        case Piercing.Double:
+                            adjustedArmor = enemy.Armor * 2;
+                            break;
+                        case Piercing.Full:
+                            adjustedArmor = 0;
+                            break;
+                        case Piercing.Half:
+                            adjustedArmor = enemy.Armor / 2;
+                            break;
+                    }
+
+                    var adjustedStrength = adventurer.Strength + melee.AttributeCorrection - adjustedArmor;
+                    if (roll < adjustedStrength)
+                    {
+                        var damage = melee.Add;
+                        for (var i = 0; i < melee.Dice; i++)
+                            damage += _random.Next(melee.Sides) + 1;
+                        _log.AppendLine(" and hits for " + damage + " damage.");
+                        enemy.Hp -= damage;
+                        CheckDead(enemy, enIndex);
                     }
                     else
                     {
-                        _log.Append(adventurer.Name + " attacks " + enemy.Name + " with " + ranged.Name + " from " + range + " feet ");
-                        var roll = _random.Next(20);
-                        var adjustedArmor = enemy.Armor;
-                        switch (ranged.Piercing)
+                        _log.AppendLine(" but misses.");
+                    }
+                }
+                else
+                {
+                    if (adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
+                    {
+                        var ranged = adventurer.Ranged;
+                        if (ranged.ReloadCooldown > 0)
                         {
-                            case Piercing.Double:
-                                adjustedArmor = enemy.Armor * 2;
-                                break;
-                            case Piercing.Full:
-                                adjustedArmor = 0;
-                                break;
-                            case Piercing.Half:
-                                adjustedArmor = enemy.Armor / 2;
-                                break;
-                        }
-
-                        var rangeIncrements = range / ranged.RangeIncrement;
-                        var adjustedDexterity = adventurer.Dexterity + ranged.AttributeCorrection - rangeIncrements;
-                        if (roll < adjustedDexterity && roll >= adjustedArmor)
-                        {
-                            var damage = ranged.Add;
-                            for (var i = 0; i < ranged.Dice; i++)
-                                damage += _random.Next(ranged.Sides) + 1;
-                            _log.AppendLine("and hits for " + damage + " damage.");
-                            enemy.Hp -= damage;
-                            CheckDead(enemy, enIndex);
+                            ranged.ReloadCooldown--;
+                            _log.AppendLine(adventurer.Name + " reloads.");
                         }
                         else
                         {
-                            _log.AppendLine("but misses.");
-                        }
+                            _log.Append(adventurer.Name + " attacks " + enemy.Name + " with " + ranged.Name + " from " + range + " feet ");
+                            var roll = _random.Next(20);
+                            var adjustedArmor = enemy.Armor;
+                            switch (ranged.Piercing)
+                            {
+                                case Piercing.Double:
+                                    adjustedArmor = enemy.Armor * 2;
+                                    break;
+                                case Piercing.Full:
+                                    adjustedArmor = 0;
+                                    break;
+                                case Piercing.Half:
+                                    adjustedArmor = enemy.Armor / 2;
+                                    break;
+                            }
 
-                        ranged.Ammo--;
-                        ranged.ReloadCooldown = ranged.Reload;
-                        var ammo = adventurer.Items.OfType<SpareAmmo>().FirstOrDefault();
-                        if (ranged.Ammo == 0 && ammo != null)
-                        {
-                            _log.AppendLine($"{adventurer.Name} unpacks his spare ammo.");
-                            ranged.Ammo = ranged.AmmoMax;
-                            ammo.Unequip(adventurer);
+                            var rangeIncrements = range / ranged.RangeIncrement;
+                            var adjustedDexterity = adventurer.Dexterity + ranged.AttributeCorrection - rangeIncrements - adjustedArmor;
+                            if (roll < adjustedDexterity)
+                            {
+                                var damage = ranged.Add;
+                                for (var i = 0; i < ranged.Dice; i++)
+                                    damage += _random.Next(ranged.Sides) + 1;
+                                _log.AppendLine("and hits for " + damage + " damage.");
+                                enemy.Hp -= damage;
+                                CheckDead(enemy, enIndex);
+                            }
+                            else
+                            {
+                                _log.AppendLine("but misses.");
+                            }
+
+                            ranged.Ammo--;
+                            ranged.ReloadCooldown = ranged.Reload;
+                            var ammo = adventurer.Items.OfType<SpareAmmo>().FirstOrDefault();
+                            if (ranged.Ammo == 0 && ammo != null)
+                            {
+                                _log.AppendLine($"{adventurer.Name} unpacks his spare ammo.");
+                                ranged.Ammo = ranged.AmmoMax;
+                                ammo.Unequip(adventurer);
+                            }
                         }
                     }
-                }
 
-                if (adventurer.Ranged == null || adventurer.Ranged.Ammo <= 0)
-                    adventurer.IdealRange = 0;
-            }
+                    if (adventurer.Ranged == null || adventurer.Ranged.Ammo <= 0)
+                        adventurer.IdealRange = 0;
+                }
         }
 
         void StepE(int eIndex)
@@ -210,48 +214,68 @@ namespace Expeditions
             var closestA = _advPositions.OrderBy(x => x).LastOrDefault();
             var advIndex = _advPositions.IndexOf(closestA); //TODO: better targeting
             var adv = _adventurers[advIndex];
-            if (_enPositions[eIndex] == closestA)
+
+            var movement = _random.Next(enemy.Agility) + 1;
+            var range = _enPositions[eIndex] - closestA;
+            var attackable = false;
+
+            if ((enemy.Ammo > 0 && InRange(enemy, range)) || range <= (movement + 1) / 2)
             {
-                _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.MeleeName);
-                var roll = _random.Next(20);
-                var adjustedArmor = adv.Armor;
-                var adjustedStrength = enemy.Strength;
-                if (roll < adjustedStrength && roll >= adjustedArmor)
+                movement = (movement + 1) / 2;
+                attackable = true;
+            }
+
+            if (_enPositions[eIndex] - movement > closestA)
+                _enPositions[eIndex] -= movement;
+            else
+            {
+                movement = _enPositions[eIndex] - closestA;
+                _enPositions[eIndex] = closestA;
+            }
+            if (movement > 0)
+            _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
+
+
+            if (attackable)
+                if (_enPositions[eIndex] == closestA)
                 {
-                    var damage = enemy.MeleeAdd;
-                    for (var i = 0; i < enemy.MeleeDice; i++)
-                        damage += _random.Next(enemy.MeleeSides) + 1;
-                    _log.AppendLine(" and hits for " + damage + " damage.");
-                    adv.Hp -= damage;
-                    if (adv.Hp <= 0)
+                    _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.MeleeName);
+                    var roll = _random.Next(20);
+                    var adjustedArmor = adv.Armor;
+                    var adjustedStrength = enemy.Strength - adjustedArmor;
+                    if (roll < adjustedStrength)
                     {
-                        _log.AppendLine($"{adv.Name} dies.");
-                        _adventurers.Remove(adv);
-                        _advPositions.RemoveAt(advIndex);
+                        var damage = enemy.MeleeAdd;
+                        for (var i = 0; i < enemy.MeleeDice; i++)
+                            damage += _random.Next(enemy.MeleeSides) + 1;
+                        _log.AppendLine(" and hits for " + damage + " damage.");
+                        adv.Hp -= damage;
+                        if (adv.Hp <= 0)
+                        {
+                            _log.AppendLine($"{adv.Name} dies.");
+                            _adventurers.Remove(adv);
+                            _advPositions.RemoveAt(advIndex);
+                        }
+                    }
+                    else
+                    {
+                        _log.AppendLine(" but misses.");
                     }
                 }
                 else
                 {
-                    _log.AppendLine(" but misses.");
-                }
-            }
-            else
-            {
-                var movement = _random.Next(enemy.Agility) + 1;
-                var range = _enPositions[eIndex] - closestA;
-                if (enemy.Ammo > 0)
-                {
-                    movement = (movement + 1) / 2;
+                    if (enemy.Ammo > 0 && InRange(enemy, range))
+                    {
                         _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.RangedName + " from " + range + " feet ");
                         var roll = _random.Next(20);
                         var adjustedArmor = adv.Armor;
                         var rangeIncrements = range / enemy.RangeIncement;
-                        var adjustedDexterity = enemy.Dexterity - rangeIncrements;
-                        if (roll < adjustedDexterity && roll >= adjustedArmor)
+                        var adjustedDexterity = enemy.Dexterity - rangeIncrements - adjustedArmor;
+                        if (roll < adjustedDexterity)
                         {
                             var damage = enemy.RangedAdd;
                             for (var i = 0; i < enemy.RangedDice; i++)
-                                damage += _random.Next(enemy.MeleeSides) + 1;
+                                damage += _random.Next(enemy.RangedSides) + 1;
                             _log.AppendLine(" and hits for " + damage + " damage.");
                             adv.Hp -= damage;
                             if (adv.Hp <= 0)
@@ -267,17 +291,8 @@ namespace Expeditions
                         }
 
                         enemy.Ammo--;
+                    }
                 }
-
-                if (_enPositions[eIndex] - movement > closestA)
-                    _enPositions[eIndex] -= movement;
-                else
-                {
-                    movement = _enPositions[eIndex] - closestA;
-                    _enPositions[eIndex] = closestA;
-                }
-                _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
-            }
         }
 
         void CheckDead (Enemy enemy, int eIndex)
@@ -301,6 +316,11 @@ namespace Expeditions
         bool InRange(Adventurer adventurer, int distance)
         {
             return distance<adventurer.FiringRange; //TODO: better range
+        }
+
+        bool InRange(Enemy enemy, int distance)
+        {
+            return distance < enemy.FiringRange; //TODO: better range
         }
 
     }
