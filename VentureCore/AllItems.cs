@@ -20,7 +20,8 @@ namespace VentureCore
             new HealthPotion(),
             new MicroHealthPotion(),
             new MinorHealthPotion(),
-            new SpareAmmo()
+            new SpareAmmo(),
+            new LongHealthPotion()
         };
 
         public static List<Item> Weapons => new List<Item>

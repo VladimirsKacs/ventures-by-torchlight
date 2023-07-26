@@ -136,6 +136,7 @@ namespace Expeditions
             {
                 Tabs.Items.Clear();
                 _adventurers.Clear();
+                _loot = new List<Item>();
             }
         }
 
