@@ -60,6 +60,18 @@ namespace VentureCore
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Carry Capacity:[/b][/td][td]{CarryCapacity}[/td][td]  | [/tr]");
             sb.AppendLine($"[tr][td][/td][td][/td][td][b]Melee:[/b][/td][td]{Melee?.Name ?? "Fists"}[/td][td]" +
                           $"  |  [/td][td][b]Ranged (ammo):[/b][/td][td]{Ranged?.Name ?? "N/A"} ({Ranged?.Ammo.ToString() ?? "N/A"})[/td][/tr]");
+            sb.Append("[tr][td][/td][td][/td][td][b]Items:[/b][/td]");
+            if (Items.Count == 0)
+                sb.AppendLine("[td]None[/td][/tr]");
+            else
+                for (var i = 0; i < Items.Count / 2; i++)
+                {
+                    sb.Append($"[tr][td][/td][td][/td][td][/td][td]{Items[i * 2].Name}[/td]");
+                    if (i * 2 + 1 >= Items.Count)
+                        sb.AppendLine("[/tr]");
+                    else
+                        sb.AppendLine($"[td] |  [/td][td]{Items[i * 2 + 1].Name}[/td][/tr]");
+                }
             sb.AppendLine("[/table]");
             return sb.ToString();
         }
