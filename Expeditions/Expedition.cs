@@ -485,8 +485,26 @@ namespace Expeditions
             var breakDifficulty = _random.Next(20);
             var lootMultiplier = (pickDifficulty + breakDifficulty) / 5;
 
-            var picker = adventurers.Where(a => a.Items.OfType<LockPick>().Any()).OrderBy(a => a.Dexterity).LastOrDefault();
-            var breaker = adventurers.Where(a => a.Items.OfType<Crowbar>().Any()).OrderBy(a => a.Strength).LastOrDefault();
+            var pickerBonus = -1;
+            foreach (var adventurer in adventurers)
+            {
+                if (adventurer.Items.OfType<LockPick>().Any())
+                    pickerBonus = 0;
+                if (adventurer.Items.OfType<AdvancedLockPick>().Any())
+                    pickerBonus = 2;
+            }
+
+            var breakerBonus = -1;
+            foreach (var adventurer in adventurers)
+            {
+                if (adventurer.Items.OfType<Crowbar>().Any())
+                    breakerBonus = 0;
+                if (adventurer.Items.OfType<HydraulicSpreader>().Any())
+                    breakerBonus = 2;
+            }
+
+            var picker = pickerBonus >= 0 ? adventurers.OrderBy(a => a.Dexterity).LastOrDefault() : null;
+            var breaker = breakerBonus >= 0 ? adventurers.OrderBy(a => a.Strength).LastOrDefault() : null;
 
             if(picker == null && breaker == null)
             {
@@ -496,7 +514,7 @@ namespace Expeditions
             var success = false;
             if (picker != null)
             {
-                if (picker.Dexterity > pickDifficulty)
+                if (picker.Dexterity + pickerBonus > pickDifficulty)
                 {
                     sb.Append("You pick the lock and find ");
                     success = true;
@@ -507,7 +525,7 @@ namespace Expeditions
 
             if (breaker != null && !success)
             {
-                if (breaker.Strength > breakDifficulty)
+                if (breaker.Strength + breakerBonus > breakDifficulty)
                 {
                     sb.Append("You break the lock and find ");
                     success = true;
@@ -580,10 +598,7 @@ namespace Expeditions
                     {
                         sb.Append($"{victim.Name} steps in it, falling");
                         victim.Hp--;
-                        if (victim.Hp > 0)
-                            sb.AppendLine(" in, taking 1 damage.");
-                        else
-                            sb.AppendLine($" to their death.");
+                        sb.AppendLine(victim.Hp > 0 ? " in, taking 1 damage." : $" to their death.");
                     }
                     break;
             }

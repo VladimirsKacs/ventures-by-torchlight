@@ -64,7 +64,7 @@ namespace VentureCore
             if (Items.Count == 0)
                 sb.AppendLine("[td]None[/td][/tr]");
             else
-                for (var i = 0; i < Items.Count / 2; i++)
+                for (var i = 0; i <= (Items.Count - 1) / 2; i++)
                 {
                     sb.Append($"[tr][td][/td][td][/td][td][/td][td]{Items[i * 2].Name}[/td]");
                     if (i * 2 + 1 >= Items.Count)

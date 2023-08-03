@@ -2,7 +2,7 @@
 {
     public class FlintLockAssembly : Item
     {
-        public override int Weight => 0;
+        public override int Weight => 1;
 
         public override int Value => 150;
 
