@@ -18,8 +18,8 @@ namespace VentureCore.Enemies
             Name = "Green Slime";
             LootTable = new LootTable(new Dictionary<Item, int>
             {
-                { new GreenGoo(), 11 },
-                { new Again(), 9 }
+                { new GreenGoo(), 9 },
+                { new Again(), 11 }
             }, random);
         }
     }
