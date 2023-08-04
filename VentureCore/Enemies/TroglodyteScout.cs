@@ -8,7 +8,7 @@ namespace VentureCore.Enemies
 {
     public class TroglodyteScout:Enemy
     {
-        public TroglodyteScout(Random random)
+        public TroglodyteScout()
         {
             Armor = 1;
             Strength = 6;
@@ -35,7 +35,7 @@ namespace VentureCore.Enemies
                 {new Groshen(),2 },
                 {new Florin(),1 },
                 {new Again(), 65 }
-            }, random);
+            });
         }
     }
 }

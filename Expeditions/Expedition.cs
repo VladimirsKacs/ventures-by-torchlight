@@ -68,21 +68,21 @@ namespace Expeditions
                         case 0:
                         case 1:
                         case 2:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random)  }, _random.Next(75,125), _random);
-                            loots.Add(new Rat((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat()  }, _random.Next(75,125), _random);
+                            loots.Add(new Rat().LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 3:
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Slime((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime() }, _random.Next(75, 125), _random);
+                            loots.Add(new Slime().LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random), new Slime(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Rat((_random)).LootTable);
-                            loots.Add(new Slime((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(), new Slime() }, _random.Next(75, 125), _random);
+                            loots.Add(new Rat().LootTable);
+                            loots.Add(new Slime().LootTable);
                             sb.AppendLine("a rat and a green slime");
                             break;
                     }
@@ -93,26 +93,26 @@ namespace Expeditions
                     {
                         case 0:
                         case 1:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Rat((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat() }, _random.Next(75, 125), _random);
+                            loots.Add(new Rat().LootTable);
                             sb.AppendLine("a rat.");
                             break;
                         case 2:
                         case 3:
-                            combat = new Combat(adventurers, new List<Enemy> { new Slime(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Slime((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Slime() }, _random.Next(75, 125), _random);
+                            loots.Add(new Slime().LootTable);
                             sb.AppendLine("a green slime.");
                             break;
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Cat(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Cat((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Cat() }, _random.Next(75, 125), _random);
+                            loots.Add(new Cat().LootTable);
                             sb.AppendLine("a feral cat.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Rat(_random), new Slime(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Rat((_random)).LootTable);
-                            loots.Add(new Slime((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Rat(), new Slime() }, _random.Next(75, 125), _random);
+                            loots.Add(new Rat().LootTable);
+                            loots.Add(new Slime().LootTable);
                             sb.AppendLine("a rat and a green slime");
                             break;
                     }
@@ -124,21 +124,21 @@ namespace Expeditions
                         case 0:
                         case 1:
                         case 2:
-                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Troglodyte((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte() }, _random.Next(75, 125), _random);
+                            loots.Add(new Troglodyte().LootTable);
                             sb.AppendLine("a troglodyte sentry.");
                             break;
                         case 3:
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteScout(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new TroglodyteScout((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteScout() }, _random.Next(75, 125), _random);
+                            loots.Add(new TroglodyteScout().LootTable);
                             sb.AppendLine("a troglodyte scout.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte(_random), new TroglodyteScout(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Troglodyte((_random)).LootTable);
-                            loots.Add(new TroglodyteScout((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte(), new TroglodyteScout() }, _random.Next(75, 125), _random);
+                            loots.Add(new Troglodyte().LootTable);
+                            loots.Add(new TroglodyteScout().LootTable);
                             sb.AppendLine("a troglodyte party.");
                             break;
                     }
@@ -149,34 +149,34 @@ namespace Expeditions
                     {
                         case 0:
                         case 1:
-                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Troglodyte((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte() }, _random.Next(75, 125), _random);
+                            loots.Add(new Troglodyte().LootTable);
                             sb.AppendLine("a troglodyte sentry.");
                             break;
                         case 2:
                         case 3:
-                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteScout(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new TroglodyteScout((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteScout() }, _random.Next(75, 125), _random);
+                            loots.Add(new TroglodyteScout().LootTable);
                             sb.AppendLine("a troglodyte scout.");
                             break;
                         case 4:
                         case 5:
-                            combat = new Combat(adventurers, new List<Enemy> { new Dog(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Dog((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Dog() }, _random.Next(75, 125), _random);
+                            loots.Add(new Dog().LootTable);
                             sb.AppendLine("a cave dog.");
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte(_random), new TroglodyteScout(_random), new Dog(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Troglodyte((_random)).LootTable);
-                            loots.Add(new TroglodyteScout((_random)).LootTable);
-                            loots.Add(new Dog(_random).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new Troglodyte(), new TroglodyteScout(), new Dog() }, _random.Next(75, 125), _random);
+                            loots.Add(new Troglodyte().LootTable);
+                            loots.Add(new TroglodyteScout().LootTable);
+                            loots.Add(new Dog().LootTable);
                             sb.AppendLine("a troglodyte party.");
                             break;
                     }
                     break;
                 case Location.OvergrownBoss:
-                    combat = new Combat(adventurers, new List<Enemy> { new Wolf(_random) }, _random.Next(75, 125), _random);
-                    loots.Add(new Wolf(_random).LootTable);
+                    combat = new Combat(adventurers, new List<Enemy> { new Wolf() }, _random.Next(75, 125), _random);
+                    loots.Add(new Wolf().LootTable);
                     loots.Add(new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 5},
@@ -186,7 +186,7 @@ namespace Expeditions
                         {new Florin(), 2 },
                         {new ArenaTicket(), 1 },
                         {new Again(), 15 }
-                    }, _random));
+                    }));
                     loots.Add(new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 5},
@@ -196,7 +196,7 @@ namespace Expeditions
                         {new Florin(), 2 },
                         {new ArenaTicket(), 1 },
                         {new Again(), 15 }
-                    }, _random));
+                    }));
                     sb.AppendLine("a large wolf's lair");
                     break;
                 case Location.TrogloBoss:
@@ -204,21 +204,21 @@ namespace Expeditions
                     {
                         case 0:
                         case 1:
-                            combat = new Combat(adventurers, new List<Enemy> {new TroglodyteKing(_random), new Troglodyte(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Troglodyte((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> {new TroglodyteKing(), new Troglodyte() }, _random.Next(75, 125), _random);
+                            loots.Add(new Troglodyte().LootTable);
                             break;
                         case 2:
                         case 3:
-                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteKing(_random), new TroglodyteScout(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new TroglodyteScout((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteKing(), new TroglodyteScout() }, _random.Next(75, 125), _random);
+                            loots.Add(new TroglodyteScout().LootTable);
                             break;
                         default:
-                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteKing(_random), new Troglodyte(_random), new TroglodyteScout(_random) }, _random.Next(75, 125), _random);
-                            loots.Add(new Troglodyte((_random)).LootTable);
-                            loots.Add(new TroglodyteScout((_random)).LootTable);
+                            combat = new Combat(adventurers, new List<Enemy> { new TroglodyteKing(), new Troglodyte(), new TroglodyteScout() }, _random.Next(75, 125), _random);
+                            loots.Add(new Troglodyte().LootTable);
+                            loots.Add(new TroglodyteScout().LootTable);
                             break;
                     }
-                    loots.Add(new TroglodyteKing(_random).LootTable);
+                    loots.Add(new TroglodyteKing().LootTable);
                     loots.Add(new LootTable(new Dictionary<Item, int>
                     {
                         {new CopperRing(), 5},
@@ -228,7 +228,7 @@ namespace Expeditions
                         {new Florin(), 2 },
                         {new ArenaTicket(), 1 },
                         {new Again(), 15 }
-                    }, _random));
+                    }));
                     loots.Add(new LootTable(new Dictionary<Item, int>
                     {
                         {new SilverRing(), 5},
@@ -238,12 +238,12 @@ namespace Expeditions
                         {new Florin(), 2 },
                         {new ArenaTicket(), 1 },
                         {new Again(), 15 }
-                    }, _random));
+                    }));
                     sb.AppendLine("a large chamber with troglodytes. A troglodyte of unequaled obesity seems to be in charge.");
                     break;
 
                 case Location.Arena1:
-                    combat = new Combat(adventurers, new List<Enemy> { new Rat(_random) }, _random.Next(75, 125), _random);
+                    combat = new Combat(adventurers, new List<Enemy> { new Rat() }, _random.Next(75, 125), _random);
                     break;
                 default:
                     return "!ERROR!";
@@ -303,7 +303,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 25 }
-                    },_random);
+                    });
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
@@ -318,7 +318,7 @@ namespace Expeditions
                         {new Florin(), 1 },
                         {new ArenaTicket(), 1},
                         {new Again(), 25 }
-                    }, _random);
+                    });
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
@@ -334,7 +334,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 25 }
-                    }, _random);
+                    });
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
@@ -354,7 +354,7 @@ namespace Expeditions
                         {new Florin(), 1 },
                         {new ArenaTicket(), 1},
                         {new Again(), 25 }
-                    }, _random);
+                    });
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
@@ -393,7 +393,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 15 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find a chest...");
                     break;
                 case Location.Overgrown2:
@@ -405,7 +405,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 15 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find a chest...");
                     break;
                 case Location.Overgrown3:
@@ -417,7 +417,7 @@ namespace Expeditions
                         {new Florin(), 2 },
                         {new ArenaTicket(), 1 },
                         {new Again(), 15 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find a chest...");
                     break;
                 case Location.Overgrown4:
@@ -426,7 +426,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new Again(), 10 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find a chest...");
                     break;
                 case Location.TroglocCave1:
@@ -435,7 +435,7 @@ namespace Expeditions
                         {new CopperRing(), 5 },
                         {new SilverRing(), 1 },
                         {new Again(), 10 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find an old chest...");
                     break;
                 case Location.TroglocCave2:
@@ -444,7 +444,7 @@ namespace Expeditions
                         {new CrudeSpear(), 5 },
                         {new Stick(), 1 },
                         {new Again(), 10 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find a weapons stand...");
                     break;
                 case Location.TroglocCave3:
@@ -456,7 +456,7 @@ namespace Expeditions
                         {new CatHide(), 2},
                         {new Bone(), 1},
                         {new Again(), 15 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find an old chest...");
                     break;
                 case Location.TroglocCave4:
@@ -469,14 +469,14 @@ namespace Expeditions
                         {new RifleManualPiece(), 2 },
                         {new Nail(), 3 },
                         {new Again(), 5 }
-                    }, _random);
+                    });
                     sb.AppendLine("You find an supply crate too well made to be of troglodyte origin...");
                     break;
                 default:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nothing(), 1 }
-                    }, _random);
+                    });
                     sb.AppendLine("You have encountered an !ERROR!");
                     break;
             }

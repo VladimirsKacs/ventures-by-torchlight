@@ -6,7 +6,7 @@ namespace VentureCore.Enemies
 {
     public class Cat:Enemy
     {
-        public Cat(Random random)
+        public Cat()
         {
             Strength = 6;
             Agility = 10;
@@ -26,7 +26,7 @@ namespace VentureCore.Enemies
                 {new Groshen(),2 },
                 {new Florin(),1 },
                 {new Again(), 65 }
-            }, random);
+            });
         }
     }
 }

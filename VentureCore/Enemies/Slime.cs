@@ -6,7 +6,7 @@ namespace VentureCore.Enemies
 {
     public class Slime:Enemy
     {
-        public Slime(Random random)
+        public Slime()
         {
             Strength = 4;
             Agility = 5;
@@ -20,7 +20,7 @@ namespace VentureCore.Enemies
             {
                 { new GreenGoo(), 9 },
                 { new Again(), 11 }
-            }, random);
+            });
         }
     }
 }

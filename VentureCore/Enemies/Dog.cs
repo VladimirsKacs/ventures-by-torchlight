@@ -6,7 +6,7 @@ namespace VentureCore.Enemies
 {
     public class Dog:Enemy
     {
-        public Dog(Random random)
+        public Dog()
         {
             Strength = 7;
             Agility = 12;
@@ -21,7 +21,7 @@ namespace VentureCore.Enemies
                 {new SmallBone(),40 },
                 {new Bone(),40 },
                 {new Again(), 65 }
-            }, random);
+            });
         }
     }
 }

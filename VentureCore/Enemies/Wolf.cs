@@ -6,7 +6,7 @@ namespace VentureCore.Enemies
 {
     public class Wolf:Enemy
     {
-        public Wolf(Random random)
+        public Wolf()
         {
             Strength = 10;
             Agility = 15;
@@ -20,7 +20,7 @@ namespace VentureCore.Enemies
             LootTable = new LootTable( 
             new Dictionary<Item, int>{
                 {new WolfPelt(),1 },
-            }, random);
+            });
         }
     }
 }

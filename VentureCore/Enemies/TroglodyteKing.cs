@@ -7,7 +7,7 @@ namespace VentureCore.Enemies
 {
     public class TroglodyteKing:Enemy
     {
-        public TroglodyteKing(Random random)
+        public TroglodyteKing()
         {
             Strength = 12;
             Agility = 8;
@@ -20,9 +20,9 @@ namespace VentureCore.Enemies
             Name = "Troglodyte king";
             LootTable = new LootTable( 
             new Dictionary<Item, int>{
-                {new BattleScepter(),1 },
+                {new BattleScepter(),2 },
                 {new GoldRing(),1 },
-            }, random);
+            });
         }
     }
 }

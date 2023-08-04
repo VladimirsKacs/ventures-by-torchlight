@@ -6,7 +6,7 @@ namespace VentureCore.Enemies
 {
     public class Rat:Enemy
     {
-        public Rat(Random random)
+        public Rat()
         {
             Strength = 5;
             Agility = 10;
@@ -28,7 +28,7 @@ namespace VentureCore.Enemies
                 {new Groshen(),10 },
                 {new Florin(),5 },
                 {new Again(), 300 }
-            }, random);
+            });
         }
     }
 }
