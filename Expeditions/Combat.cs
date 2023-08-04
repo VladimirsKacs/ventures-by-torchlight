@@ -147,6 +147,7 @@ namespace Expeditions
                 }
                 else
                 {
+                    range = closestE - _advPositions[advIndex];
                     if (adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
                     {
                         var ranged = adventurer.Ranged;
@@ -233,7 +234,7 @@ namespace Expeditions
                 _enPositions[eIndex] = closestA;
             }
             if (movement > 0)
-            _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
+                _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
 
 
             if (attackable)
@@ -264,6 +265,7 @@ namespace Expeditions
                 }
                 else
                 {
+                    range = _enPositions[eIndex] - closestA;
                     if (enemy.Ammo > 0 && InRange(enemy, range))
                     {
                         _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.RangedName + " from " + range + " feet ");
