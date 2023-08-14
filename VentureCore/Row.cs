@@ -1,9 +1,13 @@
-﻿namespace Expeditions
+﻿using System;
+
+namespace VentureCore
 {
+    [Flags]
     public enum Row
     {
-        None,
-        First,
-        Last,
+        None = 0 ,
+        First = 1,
+        Last = 2,
+        Leader = 4
     }
 }

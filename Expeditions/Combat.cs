@@ -80,8 +80,18 @@ namespace Expeditions
                 attackable = true;
             }
 
-            var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First);
-            if ((guardian != null) && (adventurer.Row == Row.Last) && (range > adventurer.IdealRange))
+            var leader = _adventurers.FirstOrDefault(x => x.Row == Row.Leader && x != adventurer);
+            var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First||x.Row == Row.Leader);
+            if (leader != null && adventurer.Row == Row.First)
+            {
+                var lIndex = _adventurers.IndexOf(leader);
+                var lPosition = _advPositions[lIndex];
+                if (lPosition - movement < _advPositions[advIndex])
+                    movement = lPosition - _advPositions[advIndex];
+                _advPositions[advIndex] += movement;
+                _log.AppendLine($"{adventurer.Name} stays behind {leader.Name}. They are now {_advPositions[lIndex] - _advPositions[advIndex]} feet apart.");
+            }
+            else if (guardian != null && adventurer.Row == Row.Last && range > adventurer.IdealRange)
             {
                 var gIndex = _adventurers.IndexOf(guardian);
                 var gPosition = _advPositions[gIndex] - 1;
