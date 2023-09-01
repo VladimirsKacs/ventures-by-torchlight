@@ -70,54 +70,63 @@ namespace Expeditions
             var enIndex = _enPositions.IndexOf(closestE); //TODO: better targeting
             var enemy = _enemies[enIndex];
 
-            var movement = _random.Next(adventurer.Agility) + 1;
+            var movement = _random.Next(adventurer.Agility/2, adventurer.Agility) + 1;
             var range = closestE - _advPositions[advIndex];
             var attackable = false;
-            if ((adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
-                || (range < (movement + 1) / 2))
+            if (_advPositions[advIndex] != closestE)
             {
-                movement = (movement + 1) / 2;
-                attackable = true;
-            }
+                if ((adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
+                    || (range < (movement + 1) / 2))
+                {
+                    movement = (movement + 1) / 2;
+                    attackable = true;
+                }
 
-            var leader = _adventurers.FirstOrDefault(x => x.Row == Row.Leader && x != adventurer);
-            var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First||x.Row == Row.Leader);
-            if (leader != null && adventurer.Row == Row.First)
-            {
-                var lIndex = _adventurers.IndexOf(leader);
-                var lPosition = _advPositions[lIndex];
-                if (lPosition - movement < _advPositions[advIndex])
-                    movement = lPosition - _advPositions[advIndex];
-                _advPositions[advIndex] += movement;
-                _log.AppendLine($"{adventurer.Name} stays behind {leader.Name}. They are now {_advPositions[lIndex] - _advPositions[advIndex]} feet apart.");
-            }
-            else if (guardian != null && adventurer.Row == Row.Last && range > adventurer.IdealRange)
-            {
-                var gIndex = _adventurers.IndexOf(guardian);
-                var gPosition = _advPositions[gIndex] - 1;
-                if (gPosition - movement < _advPositions[advIndex])
-                    movement = gPosition - _advPositions[advIndex];
-                _advPositions[advIndex] += movement;
-                _log.AppendLine($"{adventurer.Name} stays behind {guardian.Name}. They are now {_advPositions[gIndex] - _advPositions[advIndex]} feet apart.");
+                var leader = _adventurers.FirstOrDefault(x => x.Row == Row.Leader && x != adventurer);
+                var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First || x.Row == Row.Leader);
+                if (leader != null && adventurer.Row == Row.First)
+                {
+                    var lIndex = _adventurers.IndexOf(leader);
+                    var lPosition = _advPositions[lIndex];
+                    if (lPosition - movement < _advPositions[advIndex])
+                        movement = lPosition - _advPositions[advIndex];
+                    _advPositions[advIndex] += movement;
+                    _log.AppendLine(
+                        $"{adventurer.Name} stays behind {leader.Name}. They are now {_advPositions[lIndex] - _advPositions[advIndex]} feet apart.");
+                }
+                else if (guardian != null && adventurer.Row == Row.Last && range > adventurer.IdealRange)
+                {
+                    var gIndex = _adventurers.IndexOf(guardian);
+                    var gPosition = _advPositions[gIndex] - 1;
+                    if (gPosition - movement < _advPositions[advIndex])
+                        movement = gPosition - _advPositions[advIndex];
+                    _advPositions[advIndex] += movement;
+                    _log.AppendLine(
+                        $"{adventurer.Name} stays behind {guardian.Name}. They are now {_advPositions[gIndex] - _advPositions[advIndex]} feet apart.");
+                }
+                else
+                {
+                    if (range > adventurer.IdealRange)
+                    {
+                        if (range - movement <= adventurer.IdealRange)
+                            movement = range - adventurer.IdealRange;
+                        _advPositions[advIndex] += movement;
+                        _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name +
+                                        " (they are now " + (range - movement) + " feet apart.)");
+                    }
+                    else if (range < adventurer.IdealRange)
+                    {
+                        if (range + movement >= adventurer.IdealRange)
+                            movement = adventurer.IdealRange - range;
+                        _advPositions[advIndex] -= movement;
+                        _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name +
+                                        " (they are now " + (range + movement) + " feet apart.)");
+                    }
+                }
             }
             else
             {
-                if (range > adventurer.IdealRange)
-                {
-                    if (range - movement <= adventurer.IdealRange)
-                        movement = range - adventurer.IdealRange;
-                    _advPositions[advIndex] += movement;
-                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet closer to " + enemy.Name +
-                                    " (they are now " + (range - movement) + " feet apart.)");
-                }
-                else if (range < adventurer.IdealRange)
-                {
-                    if (range + movement >= adventurer.IdealRange)
-                        movement = adventurer.IdealRange - range;
-                    _advPositions[advIndex] -= movement;
-                    _log.AppendLine(adventurer.Name + " moves " + movement + " feet away from " + enemy.Name +
-                                    " (they are now " + (range + movement) + " feet apart.)");
-                }
+                attackable = true;
             }
 
             if(attackable)
@@ -226,26 +235,31 @@ namespace Expeditions
             var advIndex = _advPositions.IndexOf(closestA); //TODO: better targeting
             var adv = _adventurers[advIndex];
 
-            var movement = _random.Next(enemy.Agility) + 1;
+            var movement = _random.Next(enemy.Agility/2, enemy.Agility) + 1;
             var range = _enPositions[eIndex] - closestA;
             var attackable = false;
-
-            if ((enemy.Ammo > 0 && InRange(enemy, range)) || range <= (movement + 1) / 2)
-            {
-                movement = (movement + 1) / 2;
+            if (_enPositions[eIndex] == closestA)
                 attackable = true;
-            }
-
-            if (_enPositions[eIndex] - movement > closestA)
-                _enPositions[eIndex] -= movement;
             else
             {
-                movement = _enPositions[eIndex] - closestA;
-                _enPositions[eIndex] = closestA;
-            }
-            if (movement > 0)
-                _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name + " (they are now " + (range - movement) + " feet apart.)");
+                if ((enemy.Ammo > 0 && InRange(enemy, range)) || range <= (movement + 1) / 2)
+                {
+                    movement = (movement + 1) / 2;
+                    attackable = true;
+                }
 
+                if (_enPositions[eIndex] - movement > closestA)
+                    _enPositions[eIndex] -= movement;
+                else
+                {
+                    movement = _enPositions[eIndex] - closestA;
+                    _enPositions[eIndex] = closestA;
+                }
+
+                if (movement > 0)
+                    _log.AppendLine(enemy.Name + " moves " + movement + " feet closer to " + adv.Name +
+                                    " (they are now " + (range - movement) + " feet apart.)");
+            }
 
             if (attackable)
                 if (_enPositions[eIndex] == closestA)
@@ -327,12 +341,12 @@ namespace Expeditions
 
         bool InRange(Adventurer adventurer, int distance)
         {
-            return distance<adventurer.FiringRange; //TODO: better range
+            return distance <=  adventurer.FiringRange; //TODO: better range
         }
 
         bool InRange(Enemy enemy, int distance)
         {
-            return distance < enemy.FiringRange; //TODO: better range
+            return distance <= enemy.FiringRange; //TODO: better range
         }
 
     }

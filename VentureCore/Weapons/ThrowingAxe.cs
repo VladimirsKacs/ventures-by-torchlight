@@ -12,7 +12,7 @@
 
         public override int Add => 0;
 
-        public override int AttributeCorrection => -2;
+        public override int AttributeCorrection => -1;
 
         public override Piercing Piercing => Piercing.None;
 
