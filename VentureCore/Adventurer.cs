@@ -43,6 +43,8 @@ namespace VentureCore
 
         public Row Row { get; set; }
 
+        public bool HoldFire { get; set; }
+
         public string Print(int bid = 0)
         {
             var sb = new StringBuilder();

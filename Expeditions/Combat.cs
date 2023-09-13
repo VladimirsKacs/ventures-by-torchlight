@@ -75,7 +75,7 @@ namespace Expeditions
             var attackable = false;
             if (_advPositions[advIndex] != closestE)
             {
-                if ((adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
+                if ((!adventurer.HoldFire && adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
                     || (range < (movement + 1) / 2))
                 {
                     movement = (movement + 1) / 2;
@@ -167,7 +167,7 @@ namespace Expeditions
                 else
                 {
                     range = closestE - _advPositions[advIndex];
-                    if (adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
+                    if (!adventurer.HoldFire && adventurer.Ranged != null && adventurer.Ranged.Ammo > 0 && InRange(adventurer, range))
                     {
                         var ranged = adventurer.Ranged;
                         if (ranged.ReloadCooldown > 0)
@@ -221,7 +221,7 @@ namespace Expeditions
                         }
                     }
 
-                    if (adventurer.Ranged == null || adventurer.Ranged.Ammo <= 0)
+                    if (adventurer.Ranged == null || adventurer.Ranged.Ammo <= 0 || adventurer.HoldFire)
                         adventurer.IdealRange = 0;
                 }
         }

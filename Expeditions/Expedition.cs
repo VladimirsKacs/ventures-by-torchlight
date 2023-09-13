@@ -353,6 +353,7 @@ namespace Expeditions
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
                         {new ArenaTicket(), 1},
+                        {new RifleManualPiece(), 1},
                         {new Again(), 25 }
                     });
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
@@ -451,7 +452,8 @@ namespace Expeditions
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new CopperRing(), 5 },
-                        {new SilverRing(), 1 },
+                        {new SilverRing(), 5 },
+                        {new GoldRing(), 1 },
                         {new RatHide(), 3},
                         {new CatHide(), 2},
                         {new Bone(), 1},
