@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace VentureCore
@@ -34,6 +35,7 @@ namespace VentureCore
         public Ranged Ranged { get; set; }
 
         public ObservableCollection<Item> Items { get; set; }
+        public List<Buff> Buffs { get; set; } = new List<Buff>();
 
         public int FiringRange { get; set; }
 

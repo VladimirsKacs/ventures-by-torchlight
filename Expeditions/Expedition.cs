@@ -50,6 +50,15 @@ namespace Expeditions
                 log.AppendLine();
             }
 
+            foreach (var adventurer in adventurers)
+            {
+                var buffList = adventurer.Buffs.ToArray();
+                foreach (var buff in buffList)
+                {
+                    buff.Remove(adventurer);
+                }
+            }
+
             return log.ToString();
         }
 

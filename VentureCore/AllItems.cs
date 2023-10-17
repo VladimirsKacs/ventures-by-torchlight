@@ -9,8 +9,10 @@ namespace VentureCore
     {
         public static List<Item> Items => new List<Item>
         {
+            new AdvancedLockPick(),
             new Backpack(),
             new Crowbar(),
+            new HydraulicSpreader(),
             new LeatherArmor(),
             new LockPick(),
             new PlateArmor(),
@@ -21,7 +23,8 @@ namespace VentureCore
             new MicroHealthPotion(),
             new MinorHealthPotion(),
             new SpareAmmo(),
-            new LongHealthPotion()
+            new LongHealthPotion(),
+            new Whiskey()
         };
 
         public static List<Item> Weapons => new List<Item>

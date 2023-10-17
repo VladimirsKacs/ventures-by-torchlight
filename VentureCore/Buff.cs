@@ -6,7 +6,16 @@ namespace VentureCore
 {
     public abstract class Buff
     {
-        public abstract void Apply(Adventurer adventurer);
-        public abstract void Remove(Adventurer adventurer);
+        public virtual void Apply(Adventurer adventurer)
+        {
+            adventurer.Buffs.Add(this);
+        }
+
+        public virtual void Remove(Adventurer adventurer)
+        {
+            if (!adventurer.Buffs.Contains(this))
+                throw new Exception("not affecting!");
+            adventurer.Buffs.Remove(this);
+        }
     }
 }
