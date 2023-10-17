@@ -84,7 +84,7 @@ namespace Expeditions
 
                 var leader = _adventurers.FirstOrDefault(x => x.Row == Row.Leader && x != adventurer);
                 var guardian = _adventurers.FirstOrDefault(x => x.Row == Row.First || x.Row == Row.Leader);
-                if (leader != null && adventurer.Row == Row.First)
+                if (leader != null && adventurer.Row == Row.First && range > adventurer.IdealRange)
                 {
                     var lIndex = _adventurers.IndexOf(leader);
                     var lPosition = _advPositions[lIndex];
