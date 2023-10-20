@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace VentureCore
 {
@@ -17,7 +18,7 @@ namespace VentureCore
         public int Xp { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
-
+        [JsonIgnore]
         public int Encumbrance
         {
             get
@@ -35,6 +36,7 @@ namespace VentureCore
         public Ranged Ranged { get; set; }
 
         public ObservableCollection<Item> Items { get; set; }
+        [JsonIgnore]
         public List<Buff> Buffs { get; set; } = new List<Buff>();
 
         public int FiringRange { get; set; }

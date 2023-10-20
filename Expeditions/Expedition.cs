@@ -374,7 +374,7 @@ namespace Expeditions
             }
 
             var loot = lootTable.GetItems();
-            var separator = " a ";
+            var separator = "a ";
             if (!loot.Any())
                 sb.Append("nothing");
             foreach (var l in loot)
@@ -551,7 +551,7 @@ namespace Expeditions
                 {
                     loot.AddRange(lootTable.GetItems());
                 }
-                var separator = " a ";
+                var separator = "a ";
                 if (!loot.Any())
                     sb.Append("it empty");
                 foreach (var l in loot)
@@ -609,7 +609,13 @@ namespace Expeditions
                     {
                         sb.Append($"{victim.Name} steps in it, falling");
                         victim.Hp--;
-                        sb.AppendLine(victim.Hp > 0 ? " in, taking 1 damage." : $" to their death.");
+                        if (victim.Hp > 0)
+                            sb.AppendLine(" in, taking 1 damage.");
+                        else
+                        {
+                            sb.AppendLine(" to their death.");
+                            adventurers.Remove(victim);
+                        }
                     }
                     break;
             }
