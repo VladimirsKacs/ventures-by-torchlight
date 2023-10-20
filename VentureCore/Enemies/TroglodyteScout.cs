@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VentureCore.Items;
 using VentureCore.VendorTrash;
-using VentureCore.Weapons;
 
 namespace VentureCore.Enemies
 {

@@ -126,8 +126,8 @@ namespace Expeditions
                             break;
                     }
                     break;
-                case Location.TroglocCave1:
-                case Location.TroglocCave2:
+                case Location.TrogloCave1:
+                case Location.TrogloCave2:
                     switch (_random.Next(7))
                     {
                         case 0:
@@ -152,8 +152,8 @@ namespace Expeditions
                             break;
                     }
                     break;
-                case Location.TroglocCave3:
-                case Location.TroglocCave4:
+                case Location.TrogloCave3:
+                case Location.TrogloCave4:
                     switch (_random.Next(7))
                     {
                         case 0:
@@ -331,8 +331,8 @@ namespace Expeditions
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
-                case Location.TroglocCave1:
-                case Location.TroglocCave2:
+                case Location.TrogloCave1:
+                case Location.TrogloCave2:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 10},
@@ -347,8 +347,8 @@ namespace Expeditions
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
                     break;
-                case Location.TroglocCave3:
-                case Location.TroglocCave4:
+                case Location.TrogloCave3:
+                case Location.TrogloCave4:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new Nail(), 5},
@@ -439,7 +439,7 @@ namespace Expeditions
                     });
                     sb.AppendLine("You find a chest...");
                     break;
-                case Location.TroglocCave1:
+                case Location.TrogloCave1:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new CopperRing(), 5 },
@@ -448,7 +448,7 @@ namespace Expeditions
                     });
                     sb.AppendLine("You find an old chest...");
                     break;
-                case Location.TroglocCave2:
+                case Location.TrogloCave2:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new CrudeSpear(), 5 },
@@ -457,7 +457,7 @@ namespace Expeditions
                     });
                     sb.AppendLine("You find a weapons stand...");
                     break;
-                case Location.TroglocCave3:
+                case Location.TrogloCave3:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new CopperRing(), 5 },
@@ -470,7 +470,7 @@ namespace Expeditions
                     });
                     sb.AppendLine("You find an old chest...");
                     break;
-                case Location.TroglocCave4:
+                case Location.TrogloCave4:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
                         {new FlintLockAssembly(), 1 },
@@ -593,10 +593,10 @@ namespace Expeditions
                         sb.AppendLine($"The only damage is to their pride, however.");
                     }
                     break;
-                case Location.TroglocCave1:
-                case Location.TroglocCave2:
-                case Location.TroglocCave3:
-                case Location.TroglocCave4:
+                case Location.TrogloCave1:
+                case Location.TrogloCave2:
+                case Location.TrogloCave3:
+                case Location.TrogloCave4:
                     sb.AppendLine("There is a trap pit dug in the cave floor");
                     if (_random.Next(20) < victim.Agility)
                     {
