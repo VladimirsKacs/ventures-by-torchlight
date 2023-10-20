@@ -19,7 +19,7 @@ namespace VentureCore.Enemies
             RangedDice = 1;
             RangedName = "javelin";
             Ammo = 3;
-            RangeIncement = 15;
+            RangeIncrement = 15;
             FiringRange = 30;
             Xp = 300;
             Hp = HpMax = 3;

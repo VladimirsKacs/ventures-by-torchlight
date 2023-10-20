@@ -18,7 +18,7 @@ namespace VentureCore
         public int RangedDice { get; set; }
         public int RangedSides { get; set; }
         public int RangedAdd { get; set; }
-        public int RangeIncement { get; set; }
+        public int RangeIncrement { get; set; }
         public int Ammo { get; set; }
         public int AmmoMax { get; set; }
         public string RangedName { get; set; }

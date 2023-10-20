@@ -295,7 +295,7 @@ namespace Expeditions
                         _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.RangedName + " from " + range + " feet ");
                         var roll = _random.Next(20);
                         var adjustedArmor = adv.Armor;
-                        var rangeIncrements = range / enemy.RangeIncement;
+                        var rangeIncrements = range / enemy.RangeIncrement;
                         var adjustedDexterity = enemy.Dexterity - rangeIncrements - adjustedArmor;
                         if (roll < adjustedDexterity)
                         {

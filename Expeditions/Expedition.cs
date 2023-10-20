@@ -251,6 +251,13 @@ namespace Expeditions
                     sb.AppendLine("a large chamber with troglodytes. A troglodyte of unequaled obesity seems to be in charge.");
                     break;
 
+                case Location.MechBoss:
+                    combat = new Combat(adventurers, new List<Enemy> { new MechWarrior() }, _random.Next(75, 125), _random);
+                    loots.Add(new MechWarrior().LootTable);
+                    //TODO: loot
+                    sb.AppendLine("a massive mechanical warrior.");
+                    break;
+
                 case Location.Arena1:
                     combat = new Combat(adventurers, new List<Enemy> { new Rat() }, _random.Next(75, 125), _random);
                     break;
