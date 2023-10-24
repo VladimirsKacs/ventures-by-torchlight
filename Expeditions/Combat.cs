@@ -275,6 +275,11 @@ namespace Expeditions
                             damage += _random.Next(enemy.MeleeSides) + 1;
                         _log.AppendLine(" and hits for " + damage + " damage.");
                         adv.Hp -= damage;
+                        if (enemy.OffensiveBuff != null)
+                        {
+                            enemy.OffensiveBuff.Apply(adv);
+                            _log.AppendLine($"{enemy.Name} applies {enemy.OffensiveBuff.Name} to {adv}");
+                        }
                         if (adv.Hp <= 0)
                         {
                             _log.AppendLine($"{adv.Name} dies.");
@@ -304,6 +309,11 @@ namespace Expeditions
                                 damage += _random.Next(enemy.RangedSides) + 1;
                             _log.AppendLine(" and hits for " + damage + " damage.");
                             adv.Hp -= damage;
+                            if (enemy.OffensiveBuff != null)
+                            {
+                                enemy.OffensiveBuff.Apply(adv);
+                                _log.AppendLine($"{enemy.Name} applies {enemy.OffensiveBuff.Name} to {adv}");
+                            }
                             if (adv.Hp <= 0)
                             {
                                 _log.AppendLine($"{adv.Name} dies.");

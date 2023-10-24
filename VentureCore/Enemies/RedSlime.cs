@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VentureCore.Buffs;
 using VentureCore.VendorTrash;
 
 namespace VentureCore.Enemies
@@ -16,6 +17,7 @@ namespace VentureCore.Enemies
             Xp = 450;
             Hp = HpMax = 6;
             Name = "Red Slime";
+            OffensiveBuff = new Poison();
             LootTable = new LootTable(new Dictionary<Item, int>
             {
                 { new RedGoo(), 5 },

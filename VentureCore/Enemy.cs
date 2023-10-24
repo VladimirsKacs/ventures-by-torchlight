@@ -27,5 +27,7 @@ namespace VentureCore
         public string Name { get; set; }
         public int Armor { get; set; }
         public int FiringRange { get; set; }
+
+        public Buff OffensiveBuff { get; set; }
     }
 }

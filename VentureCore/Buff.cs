@@ -6,6 +6,8 @@ namespace VentureCore
 {
     public abstract class Buff
     {
+        public abstract string Name { get; }
+
         public virtual void Apply(Adventurer adventurer)
         {
             adventurer.Buffs.Add(this);
