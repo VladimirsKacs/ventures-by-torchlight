@@ -24,22 +24,25 @@ namespace VentureCore
 
         public List<Item> GetItems(int depth = 0)
         {
-            if (depth > 4)
-                return new List<Item>();
-            var random = _random.Next(_sum);
-            for (var i = 0; i < _loot.Count; i++)
-                if (_loot[i].Item2 > random)
-                {
-                    if (typeof(Again) == _loot[i].Item1.GetType())
+            List<Item> loot;
+            Item item= new Again();
+            do
+            {
+                var random = _random.Next(_sum);
+                for (var i = 0; i < _loot.Count; i++)
+                    if (_loot[i].Item2 > random)
                     {
-                        var tmp = GetItems(depth + 1);
-                        var tmp2 = GetItems(depth + 1);
-                        tmp.AddRange(tmp2);
-                        return tmp;
+                        item = _loot[i].Item1;
+                        break;
                     }
-                    return new List<Item> { _loot[i].Item1 };
-                }
-            return new List<Item>();
+            } while (depth >= 4 && typeof(Again) == item.GetType());
+            if(typeof(Again) == item.GetType() )
+            {
+                loot = GetItems(depth + 1);
+                loot.AddRange(GetItems(depth + 1));
+                return loot;
+            }
+            return new List<Item> { item };
         }
     }
 }
