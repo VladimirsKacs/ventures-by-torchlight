@@ -4,7 +4,7 @@
     {
         public override int Weight => 0;
 
-        public override int Value => 10;
+        public override int Value => 20;
 
         public override string Description => "A broken hydraulic spreader";
 

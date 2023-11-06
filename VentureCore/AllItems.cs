@@ -11,14 +11,18 @@ namespace VentureCore
         {
             new AdvancedLockPick(),
             new Backpack(),
+            new Chainmail(),
             new Crowbar(),
+            new HideArmor(),
             new HydraulicSpreader(),
             new LeatherArmor(),
             new LockPick(),
             new PlateArmor(),
+            new UnderArmor(),
         };
         public static List<Item> Consumables => new List<Item>
         {
+            new Buffout(),
             new HealthPotion(),
             new MicroHealthPotion(),
             new MinorHealthPotion(),
@@ -33,6 +37,7 @@ namespace VentureCore
             new Blunderbus(),
             new Crossbow(),
             new Dagger(),
+            new Flintlock(),
             new Longbow(),
             new LongSword(),
             new NailStick(),

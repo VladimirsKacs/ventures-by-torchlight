@@ -261,6 +261,15 @@ namespace Expeditions
                 case Location.Arena1:
                     combat = new Combat(adventurers, new List<Enemy> { new Rat() }, _random.Next(75, 125), _random);
                     break;
+                case Location.Arena2:
+                    combat = new Combat(adventurers, new List<Enemy> { new Wolf() }, _random.Next(75, 125), _random);
+                    break;
+                case Location.Arena3:
+                    combat = new Combat(adventurers, new List<Enemy> { new Rat(), new Rat(), new Rat(), new Rat(), new Rat(), new Rat(), new Rat(), new Rat(), new Rat(), new Rat() }, _random.Next(75, 125), _random);
+                    break;
+                case Location.Arena4:
+                    combat = new Combat(adventurers, new List<Enemy> { new FitzCerg(), new VereskTrata() }, _random.Next(75, 125), _random);
+                    break;
                 default:
                     return "!ERROR!";
             }
@@ -374,6 +383,37 @@ namespace Expeditions
                     });
                     sb.AppendLine("As you walk through the cave you notice something underfoot.");
                     sb.Append("You search through the dirt and find ");
+                    break;
+                case Location.MechMaze1:
+                case Location.MechMaze2:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Calligram(), 20},
+                        {new Icon(), 5},
+                        {new CopperRing(), 10},
+                        {new SilverRing(), 1},
+                        {new Groshen(), 5 },
+                        {new Florin(), 1 },
+                        {new Again(), 20 }
+                    });
+                    sb.AppendLine("As you walk through the maze you notice something underfoot.");
+                    sb.Append("It is ");
+                    break;
+                case Location.MechMaze3:
+                case Location.MechMaze4:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Calligram(), 20},
+                        {new Icon(), 10},
+                        {new Booklet(), 5},
+                        {new SilverRing(), 10},
+                        {new GoldRing(), 1},
+                        {new Groshen(), 5 },
+                        {new Florin(), 1 },
+                        {new Again(), 20 }
+                    });
+                    sb.AppendLine("As you walk through the maze you notice something underfoot.");
+                    sb.Append("It is ");
                     break;
                 default:
                     sb.AppendLine("ERROR! You should not get this message. Please report as a bug");
