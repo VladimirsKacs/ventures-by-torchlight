@@ -22,6 +22,7 @@ namespace VentureCore.Enemies
             RangedName = "spike dart";
             RangedDice = 1;
             RangedSides = 4;
+            RangedPiercing = Piercing.Half;
             Xp = 800;
             Hp = HpMax = 12;
             Name = "Mechanical Spitter";

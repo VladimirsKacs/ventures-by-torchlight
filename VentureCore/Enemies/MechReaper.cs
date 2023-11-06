@@ -15,6 +15,7 @@ namespace VentureCore.Enemies
             MeleeDice = 1;
             MeleeSides = 4;
             MeleeName = "scithe";
+            MeleePiercing = Piercing.Half;
             Xp = 700;
             Hp = HpMax = 12;
             Name = "Mechanical Reaper";

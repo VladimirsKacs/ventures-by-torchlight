@@ -16,12 +16,14 @@ namespace VentureCore.Enemies
             MeleeDice = 2;
             MeleeSides = 3;
             MeleeName = "sabre attachment";
+            MeleePiercing = Piercing.Half;
             RangeIncrement = 30;
             FiringRange = 89;
             Ammo = 10;
             RangedName = "gun attachment";
             RangedDice = 1;
             RangedSides = 6;
+            RangedPiercing = Piercing.Half;
             Xp = 3000;
             Hp = HpMax = 35;
             Name = "Mechanical Warrior";

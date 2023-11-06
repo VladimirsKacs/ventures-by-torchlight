@@ -15,12 +15,13 @@ namespace VentureCore
         public int MeleeSides { get; set; }
         public int MeleeAdd { get; set; }
         public string MeleeName { get; set; }
+        public Piercing MeleePiercing { get; set; }
         public int RangedDice { get; set; }
         public int RangedSides { get; set; }
         public int RangedAdd { get; set; }
         public int RangeIncrement { get; set; }
+        public Piercing RangedPiercing { get; set; }
         public int Ammo { get; set; }
-        public int AmmoMax { get; set; }
         public string RangedName { get; set; }
         public int Xp { get; set; }
         public LootTable LootTable { get; set; }

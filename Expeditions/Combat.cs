@@ -265,6 +265,18 @@ namespace Expeditions
                     _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.MeleeName);
                     var roll = _random.Next(20);
                     var adjustedArmor = adv.Armor;
+                    switch (enemy.MeleePiercing)
+                    {
+                        case Piercing.Double:
+                            adjustedArmor = adjustedArmor * 2;
+                            break;
+                        case Piercing.Full:
+                            adjustedArmor = 0;
+                            break;
+                        case Piercing.Half:
+                            adjustedArmor = adjustedArmor / 2;
+                            break;
+                    }
                     var adjustedStrength = enemy.Strength - adjustedArmor;
                     if (roll < adjustedStrength)
                     {
@@ -298,6 +310,18 @@ namespace Expeditions
                         _log.Append(enemy.Name + " attacks " + adv.Name + " with " + enemy.RangedName + " from " + range + " feet ");
                         var roll = _random.Next(20);
                         var adjustedArmor = adv.Armor;
+                        switch (enemy.RangedPiercing)
+                        {
+                            case Piercing.Double:
+                                adjustedArmor = adjustedArmor * 2;
+                                break;
+                            case Piercing.Full:
+                                adjustedArmor = 0;
+                                break;
+                            case Piercing.Half:
+                                adjustedArmor = adjustedArmor / 2;
+                                break;
+                        }
                         var rangeIncrements = range / enemy.RangeIncrement;
                         var adjustedDexterity = enemy.Dexterity - rangeIncrements - adjustedArmor;
                         if (roll < adjustedDexterity)
