@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VentureCore;
+using VentureCore.Buffs;
 using VentureCore.VendorTrash;
 using VentureCore.Items;
 using VentureCore.Enemies;
@@ -183,6 +184,57 @@ namespace Expeditions
                             break;
                     }
                     break;
+                case Location.MechMaze1:
+                case Location.MechMaze2:
+                    switch (_random.Next(7))
+                    {
+                        case 0:
+                        case 1:
+                            combat = new Combat(adventurers, new List<Enemy> { new SlimeCube() }, _random.Next(75, 125), _random);
+                            loots.Add(new SlimeCube().LootTable);
+                            sb.AppendLine("a slime cube.");
+                            break;
+                        case 2:
+                        case 3:
+                            combat = new Combat(adventurers, new List<Enemy> { new RedSlime() }, _random.Next(75, 125), _random);
+                            loots.Add(new RedSlime().LootTable);
+                            sb.AppendLine("a red slime.");
+                            break;
+                        case 4:
+                        case 5:
+                            combat = new Combat(adventurers, new List<Enemy> { new MechReaper() }, _random.Next(75, 125), _random);
+                            loots.Add(new MechReaper().LootTable);
+                            sb.AppendLine("a mechanical reaper.");
+                            break;
+                        default:
+                            combat = new Combat(adventurers, new List<Enemy> { new MechSpitter() }, _random.Next(75, 125), _random);
+                            loots.Add(new MechSpitter().LootTable);
+                            sb.AppendLine("a mechanical 'spitter'.");
+                            break;
+                    }
+                    break;
+                case Location.MechMaze3:
+                case Location.MechMaze4:
+                    switch (_random.Next(3))
+                    {
+                        case 0:
+                            combat = new Combat(adventurers, new List<Enemy> { new MechReaper() }, _random.Next(75, 125), _random);
+                            loots.Add(new MechReaper().LootTable);
+                            sb.AppendLine("a mechanical reaper.");
+                            break;
+                        case 1:
+                            combat = new Combat(adventurers, new List<Enemy> { new MechSpitter() }, _random.Next(75, 125), _random);
+                            loots.Add(new MechSpitter().LootTable);
+                            sb.AppendLine("a mechanical 'spitter'.");
+                            break;
+                        default:
+                            combat = new Combat(adventurers, new List<Enemy> { new MechReaper(), new MechSpitter() }, _random.Next(75, 125), _random);
+                            loots.Add(new MechSpitter().LootTable);
+                            loots.Add(new MechReaper().LootTable);
+                            sb.AppendLine("a mechanical tag team.");
+                            break;
+                    }
+                    break;
                 case Location.OvergrownBoss:
                     combat = new Combat(adventurers, new List<Enemy> { new Wolf() }, _random.Next(75, 125), _random);
                     loots.Add(new Wolf().LootTable);
@@ -254,7 +306,23 @@ namespace Expeditions
                 case Location.MechBoss:
                     combat = new Combat(adventurers, new List<Enemy> { new MechWarrior() }, _random.Next(75, 125), _random);
                     loots.Add(new MechWarrior().LootTable);
-                    //TODO: loot
+                    loots.Add(new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Calligram(), 5},
+                        {new Icon(), 5},
+                        {new Pfennig(), 10 },
+                        {new Groshen(), 6 },
+                        {new Florin(), 2 },
+                        {new ArenaTicket(), 1 },
+                        {new Again(), 15 }
+                    }));
+                    loots.Add(new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Icon(), 5},
+                        {new Booklet(), 5},
+                        {new PerlMapPiece(), 1 },
+                        {new Again(), 15 }
+                    }));
                     sb.AppendLine("a massive mechanical warrior.");
                     break;
 
@@ -403,13 +471,14 @@ namespace Expeditions
                 case Location.MechMaze4:
                     lootTable = new LootTable(new Dictionary<Item, int>
                     {
-                        {new Calligram(), 20},
-                        {new Icon(), 10},
+                        {new Calligram(), 10},
+                        {new Icon(), 20},
                         {new Booklet(), 5},
                         {new SilverRing(), 10},
                         {new GoldRing(), 1},
                         {new Groshen(), 5 },
                         {new Florin(), 1 },
+                        {new PerlMapPiece(), 1},
                         {new Again(), 20 }
                     });
                     sb.AppendLine("As you walk through the maze you notice something underfoot.");
@@ -491,7 +560,7 @@ namespace Expeditions
                     {
                         {new CopperRing(), 5 },
                         {new SilverRing(), 1 },
-                        {new Again(), 10 }
+                        {new Again(), 6 }
                     });
                     sb.AppendLine("You find an old chest...");
                     break;
@@ -529,6 +598,54 @@ namespace Expeditions
                         {new Again(), 5 }
                     });
                     sb.AppendLine("You find an supply crate too well made to be of troglodyte origin...");
+                    break;
+                case Location.MechMaze1:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Calligram(), 5 },
+                        {new Icon(), 1 },
+                        {new Again(), 5 }
+                    });
+                    sb.AppendLine("You find an old locker...");
+                    break;
+                case Location.MechMaze2:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new MetalPlate(), 10 },
+                        {new Cog(), 10 },
+                        {new Spring(), 6 },
+                        {new Piston(), 2 },
+                        {new Nail(), 2 },
+                        {new AdvancedLockPick(), 1 },
+                        {new Again(), 30 }
+                    });
+                    sb.AppendLine("You find an old tool cabinet...");
+                    break;
+                case Location.MechMaze3:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new Calligram(), 10 },
+                        {new Icon(), 5 },
+                        {new Booklet(), 3 },
+                        {new Tome(), 1 },
+                        {new PerlMapPiece(), 2 },
+                        {new Again(), 20 }
+                    });
+                    sb.AppendLine("You find an old book closet...");
+                    break;
+                case Location.MechMaze4:
+                    lootTable = new LootTable(new Dictionary<Item, int>
+                    {
+                        {new AmphetamineRecipe(), 1 },
+                        {new AntivenomRecipe(), 1 },
+                        {new GunpowderRecipe(), 1 },
+                        {new ImmunityRecipe(), 1 },
+                        {new Tome(), 1 },
+                        {new RedGoo(), 5 },
+                        {new GreenGoo(), 5},
+                        {new Again(), 15 }
+                    });
+                    sb.AppendLine("You find a locked reagent desk...");
                     break;
                 default:
                     lootTable = new LootTable(new Dictionary<Item, int>
@@ -665,6 +782,71 @@ namespace Expeditions
                         }
                     }
                     break;
+
+                case Location.MechMaze1:
+                case Location.MechMaze2:
+                case Location.MechMaze3:
+                case Location.MechMaze4:
+                    switch (_random.Next(2))
+                    {
+                        case 1:
+                            sb.AppendLine("There is a dart trap in the maze wall");
+                            if (_random.Next(20) < victim.Agility)
+                            {
+                                sb.Append($"{victim.Name} nimbly evades it");
+                                if (adventurers.Count > 1)
+                                    sb.Append(" and points it out to the rest of the party");
+                                sb.AppendLine(".");
+                            }
+                            else
+                            {
+                                sb.Append($"{victim.Name} is struck by a dart");
+                                victim.Hp--;
+                                if (victim.Hp > 0)
+                                {
+                                    sb.Append(" taking 1 damage,");
+                                    if (_random.Next(20) < victim.Constitution)
+                                        sb.AppendLine(" but is otherwise fine.");
+                                    else
+                                    {
+                                        new Poison().Apply(victim);
+                                        sb.AppendLine(" and is poisoned");
+                                    }
+                                }
+                                else
+                                {
+                                    sb.AppendLine(" killing them instantly.");
+                                    adventurers.Remove(victim);
+                                }
+                            }
+                            break;
+                        case 2:
+                            sb.AppendLine("There is a boulder trap in the maze ceiling");
+                            if (_random.Next(20) < victim.Agility)
+                            {
+                                sb.Append($"{victim.Name} nimbly evades it");
+                                if (adventurers.Count > 1)
+                                    sb.Append(" and points it out to the rest of the party");
+                                sb.AppendLine(".");
+                            }
+                            else
+                            {
+                                sb.Append($"{victim.Name} steps in it,");
+                                var damage = _random.Next(1, 4);
+                                victim.Hp -= damage;
+                                if (victim.Hp > 0)
+                                    sb.AppendLine($"taking {damage} damage.");
+                                else
+                                {
+                                    sb.AppendLine(" and is crushed.");
+                                    adventurers.Remove(victim);
+                                }
+                            }
+                            break;
+                    }
+
+                    break;
+                   
             }
 
             return sb.ToString();

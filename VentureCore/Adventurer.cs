@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -23,12 +24,7 @@ namespace VentureCore
         {
             get
             {
-                var sum = 0;
-                foreach (var item in Items)
-                {
-                    sum += item.Weight;
-                }
-                return sum;
+                return Items.Sum(item => item.Weight);
             }
         }
 
