@@ -15,7 +15,7 @@ namespace Expeditions
     {
 
         public List<Item> Loot = new List<Item>();
-        Random _random = new Random();
+        static Random _random = new Random();
 
         public string Go(List<Adventurer> adventurers, Location location)
         {
@@ -46,6 +46,9 @@ namespace Expeditions
                         break;
                     case 4:
                         log.Append(Trap(adventurers, location));
+                        break;
+                    default:
+                        log.AppendLine("#ERROR#");
                         break;
                 }
                 log.AppendLine();
@@ -789,7 +792,7 @@ namespace Expeditions
                 case Location.MechMaze4:
                     switch (_random.Next(2))
                     {
-                        case 1:
+                        case 0:
                             sb.AppendLine("There is a dart trap in the maze wall");
                             if (_random.Next(20) < victim.Agility)
                             {
@@ -820,7 +823,7 @@ namespace Expeditions
                                 }
                             }
                             break;
-                        case 2:
+                        case 1:
                             sb.AppendLine("There is a boulder trap in the maze ceiling");
                             if (_random.Next(20) < victim.Agility)
                             {
@@ -842,6 +845,9 @@ namespace Expeditions
                                     adventurers.Remove(victim);
                                 }
                             }
+                            break;
+                        default:
+                            sb.Append("#ERROR#");
                             break;
                     }
 
