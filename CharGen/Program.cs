@@ -12,10 +12,14 @@ namespace CharGen
 {
     class Program
     {
+        static Random random = new Random();
         static void Main(string[] args)
         {
             var adv = CharGen();
             Console.WriteLine(adv.Print(300));
+            Save(adv);
+            adv = CharGen(2);
+            Console.WriteLine(adv.Print(450));
             Save(adv);
             adv = CharGen(2);
             Console.WriteLine(adv.Print(450));
@@ -39,12 +43,11 @@ namespace CharGen
 
         static void PrintStore()
         {
-            Console.WriteLine(new RustyDagger().Print(1));
+            Console.WriteLine(new Shortbow().Print(1));
         }
 
         static Adventurer CharGen(int level = 1)
         {
-            var random = new Random();
             var adventurer = new Adventurer
             {
                 Agility = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7),
@@ -128,7 +131,6 @@ namespace CharGen
 
         static string NameGen()
         {
-            var random = new Random();
             return Honorific[random.Next(Honorific.Count)] + " " + FirstNames[random.Next(FirstNames.Count)] + " " + LastNames[random.Next(LastNames.Count)];
         }
     }
