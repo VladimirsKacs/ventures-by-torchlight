@@ -27,6 +27,12 @@ namespace Expeditions
 
             for (var i = 0; i < _random.Next(4,8); i++)
             {
+                if (!adventurers.Any())
+                {
+                    log.AppendLine("EVERYONE DIED!");
+                    break;
+                }
+
                 if (adventurers.Any(x => x.Hp <= x.HpThreshold))
                 {
                     log.AppendLine("The party stops for the day to mend their wounds.");

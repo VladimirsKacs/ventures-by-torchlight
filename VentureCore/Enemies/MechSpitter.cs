@@ -11,7 +11,7 @@ namespace VentureCore.Enemies
         {
             Armor = 2;
             Strength = 10;
-            Agility = 15;
+            Agility = 10;
             Dexterity = 15;
             MeleeDice = 1;
             MeleeSides = 2;
