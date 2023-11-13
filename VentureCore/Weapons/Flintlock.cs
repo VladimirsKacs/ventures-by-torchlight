@@ -4,15 +4,15 @@
     {
         public override int RangeIncrement => 75;
 
-        public override int AmmoMax => 5;
+        public override int AmmoMax => 4;
 
         public override int Dice => 1;
 
         public override int Sides => 6;
 
-        public override int Add => 1;
+        public override int Add => 2;
 
-        public override int AttributeCorrection => 1;
+        public override int AttributeCorrection => 2;
 
         public override Piercing Piercing => Piercing.Full;
 

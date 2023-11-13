@@ -19,6 +19,7 @@ namespace StockMarket
             {
                 var file = File.OpenText("stocks.dat");
                 stats = JsonConvert.DeserializeObject<Stats>(file.ReadToEnd());
+                file.Close();
             }
             if (stats == null)
             {
@@ -28,7 +29,26 @@ namespace StockMarket
                     Cmm = 0.5
                 };
             }
-            
+
+            Console.WriteLine(@"Dividends?
+1.CCC
+2.CMM");
+            var c = Console.ReadKey();
+            switch (c.KeyChar)
+            {
+                case '1':
+                    Console.WriteLine("amount (pf per share)");
+                    var amount = Console.ReadLine();
+                    stats.Ccc -= double.Parse(amount) * 0.01;
+                    break;
+                case '2':
+                    Console.WriteLine("amount (pf per share)");
+                    amount = Console.ReadLine();
+                    stats.Cmm -= double.Parse(amount) * 0.01;
+                    break;
+            }
+
+
             stats.Ccc*=1.04+(_random.NextDouble()*0.02);
             stats.Cmm *= 0.95 + (_random.NextDouble() * 0.2);
             Console.WriteLine(@$"[spoiler=stock market]
@@ -47,7 +67,7 @@ Charmark Market Maker:
 Buy:
 {_random.Next(1, 5)} shares @{stats.Cmm - 0.005:F2}F by general public
 {_random.Next(5, 15)} shares @{stats.Cmm - 0.015:F2}F by general public
-100 shares @{stats.Ccc * 0.95:F2}F by CMM buyback
+100 shares @{stats.Cmm * 0.95:F2}F by CMM buyback
 
 Sell:
 {_random.Next(1, 5)} shares @{stats.Cmm + 0.005:F2}F by general public
