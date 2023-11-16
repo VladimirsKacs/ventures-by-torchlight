@@ -759,6 +759,7 @@ namespace Expeditions
                         if (adventurers.Count > 1)
                             sb.Append(" and points it out to the rest of the party");
                         sb.AppendLine(".");
+                        victim.Xp += 100;
                     }
                     else
                     {
@@ -777,6 +778,7 @@ namespace Expeditions
                         if (adventurers.Count > 1)
                             sb.Append(" and points it out to the rest of the party");
                         sb.AppendLine(".");
+                        victim.Xp += 200;
                     }
                     else
                     {
@@ -806,6 +808,7 @@ namespace Expeditions
                                 if (adventurers.Count > 1)
                                     sb.Append(" and points it out to the rest of the party");
                                 sb.AppendLine(".");
+                                victim.Xp += 300;
                             }
                             else
                             {
@@ -837,6 +840,7 @@ namespace Expeditions
                                 if (adventurers.Count > 1)
                                     sb.Append(" and points it out to the rest of the party");
                                 sb.AppendLine(".");
+                                victim.Xp += 300;
                             }
                             else
                             {

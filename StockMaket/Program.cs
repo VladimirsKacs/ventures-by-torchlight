@@ -39,18 +39,18 @@ namespace StockMarket
                 case '1':
                     Console.WriteLine("amount (pf per share)");
                     var amount = Console.ReadLine();
-                    stats.Ccc -= double.Parse(amount) * 0.01;
+                    stats.Ccc -= int.Parse(amount) * 0.01;
                     break;
                 case '2':
                     Console.WriteLine("amount (pf per share)");
                     amount = Console.ReadLine();
-                    stats.Cmm -= double.Parse(amount) * 0.01;
+                    stats.Cmm -= int.Parse(amount) * 0.01;
                     break;
             }
 
 
             stats.Ccc*=1.04+(_random.NextDouble()*0.02);
-            stats.Cmm *= 0.95 + (_random.NextDouble() * 0.2);
+            stats.Cmm *= 0.95 + (_random.NextDouble() * 0.21);
             Console.WriteLine(@$"[spoiler=stock market]
 Charmark Coal Corporation:
 Buy:
