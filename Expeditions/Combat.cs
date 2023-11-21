@@ -285,7 +285,7 @@ namespace Expeditions
                             damage += _random.Next(enemy.MeleeSides) + 1;
                         _log.AppendLine(" and hits for " + damage + " damage.");
                         adv.Hp -= damage;
-                        if (enemy.OffensiveBuff != null)
+                        if (enemy.OffensiveBuff != null && adv.Constitution<_random.Next(20))
                         {
                             enemy.OffensiveBuff.Apply(adv);
                             _log.AppendLine($"{enemy.Name} applies {enemy.OffensiveBuff.Name} to {adv}");

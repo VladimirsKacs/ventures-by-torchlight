@@ -36,6 +36,7 @@ namespace VentureCore
             new Arquebus(),
             new Blunderbus(),
             new Crossbow(),
+            new CrudeSpear(),
             new Dagger(),
             new Flintlock(),
             new Longbow(),
