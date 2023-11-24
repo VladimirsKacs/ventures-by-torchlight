@@ -4,26 +4,27 @@ using VentureCore.VendorTrash;
 
 namespace VentureCore.Enemies
 {
+    //DECEASED on Turn 37
     public class VereskTrata : Enemy
     {
         public VereskTrata()
         {
-            Armor = 2;
+            Armor = 1;
             Strength = 9;
-            Dexterity = 7;
+            Dexterity = 10;
             Agility = 13;
-            MeleeSides = 6;
+            MeleeSides = 4;
             MeleeDice = 1;
-            MeleeName = "short sword";
+            MeleeName = "crude spear";
             RangedSides = 3;
             RangedDice = 1;
-            RangedName = "short bow";
-            Ammo = 10;
-            RangeIncrement = 30;
-            FiringRange = 59;
+            RangedName = "javelin";
+            Ammo = 3;
+            RangeIncrement = 15;
+            FiringRange = 29;
             Xp = 500;
             Hp = HpMax = 7;
-            Name = "Pfc. Veresk Trata";
+            Name = "Pfc. Veresk Trata in troglodyte costume";
             LootTable = new LootTable(
             new Dictionary<Item, int>{
                 {new Nothing(), 1 }
