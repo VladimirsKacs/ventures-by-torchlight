@@ -8,10 +8,12 @@ namespace VentureCore.Enemies
     {
         public TroglodyteKing()
         {
-            Strength = 12;
+            Strength = 13;
             Agility = 8;
             MeleeDice = 1;
             MeleeSides = 6;
+            MeleeAdd = 1;
+            MeleePiercing = Piercing.Double;
             Armor = 2;
             MeleeName = "battle scepter";
             Xp = 1500;
