@@ -48,10 +48,10 @@ namespace StockMarket
                     break;
             }
 
-
+            Console.WriteLine();
             stats.Ccc*=1.04+(_random.NextDouble()*0.02);
             stats.Cmm *= 0.95 + (_random.NextDouble() * 0.21);
-            Console.WriteLine(@$"[spoiler=stock market]
+            Console.WriteLine(@$"[spoiler=Stock Market]
 Charmark Coal Corporation:
 Buy:
 {_random.Next(1,5)} shares @{stats.Ccc - 0.005:F2}F by general public

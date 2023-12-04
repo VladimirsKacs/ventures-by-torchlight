@@ -18,7 +18,7 @@ namespace VentureCore.Enemies
             MeleeName = "sabre attachment";
             MeleePiercing = Piercing.Half;
             RangeIncrement = 30;
-            FiringRange = 89;
+            FiringRange = 119;
             Ammo = 10;
             RangedName = "gun attachment";
             RangedDice = 1;
